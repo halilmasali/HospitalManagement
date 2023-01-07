@@ -32,8 +32,12 @@ namespace HospitalManagement
             this.tabPage_Secreter = new System.Windows.Forms.TabPage();
             this.tabPage_Doctor = new System.Windows.Forms.TabPage();
             this.tabPage_Patient = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txt_patient_search = new System.Windows.Forms.TextBox();
             this.dtGViewPatient = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_patient_delete = new System.Windows.Forms.Button();
+            this.btn_patient_update = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txt_patient_phone = new System.Windows.Forms.MaskedTextBox();
             this.txt_patient_name = new System.Windows.Forms.TextBox();
@@ -44,26 +48,29 @@ namespace HospitalManagement
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage_Appointment = new System.Windows.Forms.TabPage();
-            this.btn_appointment = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dtGViewAppointment = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_appointment_delete = new System.Windows.Forms.Button();
+            this.cmb_branch = new System.Windows.Forms.ComboBox();
+            this.btn_appointment_create = new System.Windows.Forms.Button();
+            this.cmb_doctor = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.cmb_patient = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.dt_date = new System.Windows.Forms.DateTimePicker();
             this.cmb_clock = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dt_date = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmb_doctor = new System.Windows.Forms.ComboBox();
-            this.cmb_branch = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.btn_patient_update = new System.Windows.Forms.Button();
-            this.btn_patient_delete = new System.Windows.Forms.Button();
-            this.txt_patient_search = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.tabPage_Patient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGViewPatient)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabPage_Appointment.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtGViewAppointment)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,6 +108,23 @@ namespace HospitalManagement
             this.tabPage_Patient.Text = "Hasta";
             this.tabPage_Patient.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(672, 23);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(23, 13);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "Ara";
+            // 
+            // txt_patient_search
+            // 
+            this.txt_patient_search.Location = new System.Drawing.Point(701, 20);
+            this.txt_patient_search.Name = "txt_patient_search";
+            this.txt_patient_search.Size = new System.Drawing.Size(187, 20);
+            this.txt_patient_search.TabIndex = 0;
+            this.txt_patient_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_patient_search_KeyPress);
+            // 
             // dtGViewPatient
             // 
             this.dtGViewPatient.AllowUserToAddRows = false;
@@ -133,6 +157,26 @@ namespace HospitalManagement
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Hasta Kayıt Yönetim";
             // 
+            // btn_patient_delete
+            // 
+            this.btn_patient_delete.Location = new System.Drawing.Point(24, 384);
+            this.btn_patient_delete.Name = "btn_patient_delete";
+            this.btn_patient_delete.Size = new System.Drawing.Size(280, 37);
+            this.btn_patient_delete.TabIndex = 6;
+            this.btn_patient_delete.Text = "Hasta Sil";
+            this.btn_patient_delete.UseVisualStyleBackColor = true;
+            this.btn_patient_delete.Click += new System.EventHandler(this.btn_patient_delete_Click);
+            // 
+            // btn_patient_update
+            // 
+            this.btn_patient_update.Location = new System.Drawing.Point(24, 315);
+            this.btn_patient_update.Name = "btn_patient_update";
+            this.btn_patient_update.Size = new System.Drawing.Size(280, 37);
+            this.btn_patient_update.TabIndex = 5;
+            this.btn_patient_update.Text = "Hasta Güncelle";
+            this.btn_patient_update.UseVisualStyleBackColor = true;
+            this.btn_patient_update.Click += new System.EventHandler(this.btn_patient_update_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -148,21 +192,21 @@ namespace HospitalManagement
             this.txt_patient_phone.Mask = "(999) 000-0000";
             this.txt_patient_phone.Name = "txt_patient_phone";
             this.txt_patient_phone.Size = new System.Drawing.Size(187, 20);
-            this.txt_patient_phone.TabIndex = 12;
+            this.txt_patient_phone.TabIndex = 2;
             // 
             // txt_patient_name
             // 
             this.txt_patient_name.Location = new System.Drawing.Point(117, 36);
             this.txt_patient_name.Name = "txt_patient_name";
             this.txt_patient_name.Size = new System.Drawing.Size(187, 20);
-            this.txt_patient_name.TabIndex = 1;
+            this.txt_patient_name.TabIndex = 0;
             // 
             // btn_patient_save
             // 
             this.btn_patient_save.Location = new System.Drawing.Point(24, 246);
             this.btn_patient_save.Name = "btn_patient_save";
             this.btn_patient_save.Size = new System.Drawing.Size(280, 37);
-            this.btn_patient_save.TabIndex = 11;
+            this.btn_patient_save.TabIndex = 4;
             this.btn_patient_save.Text = "Hasta Kaydet";
             this.btn_patient_save.UseVisualStyleBackColor = true;
             this.btn_patient_save.Click += new System.EventHandler(this.btn_patient_save_Click);
@@ -181,14 +225,14 @@ namespace HospitalManagement
             this.txt_patient_email.Location = new System.Drawing.Point(117, 192);
             this.txt_patient_email.Name = "txt_patient_email";
             this.txt_patient_email.Size = new System.Drawing.Size(187, 20);
-            this.txt_patient_email.TabIndex = 7;
+            this.txt_patient_email.TabIndex = 3;
             // 
             // txt_patient_lastname
             // 
             this.txt_patient_lastname.Location = new System.Drawing.Point(117, 88);
             this.txt_patient_lastname.Name = "txt_patient_lastname";
             this.txt_patient_lastname.Size = new System.Drawing.Size(187, 20);
-            this.txt_patient_lastname.TabIndex = 3;
+            this.txt_patient_lastname.TabIndex = 1;
             // 
             // label8
             // 
@@ -210,17 +254,10 @@ namespace HospitalManagement
             // 
             // tabPage_Appointment
             // 
-            this.tabPage_Appointment.Controls.Add(this.btn_appointment);
-            this.tabPage_Appointment.Controls.Add(this.label5);
-            this.tabPage_Appointment.Controls.Add(this.cmb_patient);
-            this.tabPage_Appointment.Controls.Add(this.label4);
-            this.tabPage_Appointment.Controls.Add(this.cmb_clock);
-            this.tabPage_Appointment.Controls.Add(this.label3);
-            this.tabPage_Appointment.Controls.Add(this.dt_date);
-            this.tabPage_Appointment.Controls.Add(this.label2);
-            this.tabPage_Appointment.Controls.Add(this.label1);
-            this.tabPage_Appointment.Controls.Add(this.cmb_doctor);
-            this.tabPage_Appointment.Controls.Add(this.cmb_branch);
+            this.tabPage_Appointment.Controls.Add(this.label11);
+            this.tabPage_Appointment.Controls.Add(this.textBox1);
+            this.tabPage_Appointment.Controls.Add(this.dtGViewAppointment);
+            this.tabPage_Appointment.Controls.Add(this.groupBox2);
             this.tabPage_Appointment.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Appointment.Name = "tabPage_Appointment";
             this.tabPage_Appointment.Padding = new System.Windows.Forms.Padding(3);
@@ -229,43 +266,149 @@ namespace HospitalManagement
             this.tabPage_Appointment.Text = "Randevu";
             this.tabPage_Appointment.UseVisualStyleBackColor = true;
             // 
-            // btn_appointment
+            // label11
             // 
-            this.btn_appointment.Location = new System.Drawing.Point(79, 199);
-            this.btn_appointment.Name = "btn_appointment";
-            this.btn_appointment.Size = new System.Drawing.Size(187, 37);
-            this.btn_appointment.TabIndex = 10;
-            this.btn_appointment.Text = "Randevu Oluştur";
-            this.btn_appointment.UseVisualStyleBackColor = true;
-            this.btn_appointment.Click += new System.EventHandler(this.btn_appointment_Click);
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(669, 23);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(23, 13);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "Ara";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(698, 20);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(187, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // dtGViewAppointment
+            // 
+            this.dtGViewAppointment.AllowUserToAddRows = false;
+            this.dtGViewAppointment.AllowUserToDeleteRows = false;
+            this.dtGViewAppointment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtGViewAppointment.Location = new System.Drawing.Point(378, 64);
+            this.dtGViewAppointment.Name = "dtGViewAppointment";
+            this.dtGViewAppointment.ReadOnly = true;
+            this.dtGViewAppointment.Size = new System.Drawing.Size(507, 431);
+            this.dtGViewAppointment.TabIndex = 17;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btn_appointment_delete);
+            this.groupBox2.Controls.Add(this.cmb_branch);
+            this.groupBox2.Controls.Add(this.btn_appointment_create);
+            this.groupBox2.Controls.Add(this.cmb_doctor);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.cmb_patient);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.dt_date);
+            this.groupBox2.Controls.Add(this.cmb_clock);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Location = new System.Drawing.Point(20, 20);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(335, 475);
+            this.groupBox2.TabIndex = 11;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Randevu Yönetim";
+            // 
+            // btn_appointment_delete
+            // 
+            this.btn_appointment_delete.Location = new System.Drawing.Point(29, 405);
+            this.btn_appointment_delete.Name = "btn_appointment_delete";
+            this.btn_appointment_delete.Size = new System.Drawing.Size(275, 37);
+            this.btn_appointment_delete.TabIndex = 6;
+            this.btn_appointment_delete.Text = "Randevu İptal Et";
+            this.btn_appointment_delete.UseVisualStyleBackColor = true;
+            // 
+            // cmb_branch
+            // 
+            this.cmb_branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_branch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_branch.FormattingEnabled = true;
+            this.cmb_branch.Location = new System.Drawing.Point(117, 36);
+            this.cmb_branch.Name = "cmb_branch";
+            this.cmb_branch.Size = new System.Drawing.Size(187, 21);
+            this.cmb_branch.TabIndex = 0;
+            this.cmb_branch.SelectedIndexChanged += new System.EventHandler(this.cmb_branch_SelectedIndexChanged);
+            // 
+            // btn_appointment_create
+            // 
+            this.btn_appointment_create.Location = new System.Drawing.Point(29, 318);
+            this.btn_appointment_create.Name = "btn_appointment_create";
+            this.btn_appointment_create.Size = new System.Drawing.Size(275, 37);
+            this.btn_appointment_create.TabIndex = 5;
+            this.btn_appointment_create.Text = "Randevu Oluştur";
+            this.btn_appointment_create.UseVisualStyleBackColor = true;
+            this.btn_appointment_create.Click += new System.EventHandler(this.btn_appointment_create_Click);
+            // 
+            // cmb_doctor
+            // 
+            this.cmb_doctor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_doctor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_doctor.Enabled = false;
+            this.cmb_doctor.FormattingEnabled = true;
+            this.cmb_doctor.Location = new System.Drawing.Point(117, 88);
+            this.cmb_doctor.Name = "cmb_doctor";
+            this.cmb_doctor.Size = new System.Drawing.Size(187, 21);
+            this.cmb_doctor.TabIndex = 1;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 99);
+            this.label5.Location = new System.Drawing.Point(26, 144);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Hasta";
+            this.label5.Text = "Hasta Seçimi";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(26, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Branş Seçimi";
             // 
             // cmb_patient
             // 
             this.cmb_patient.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_patient.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_patient.FormattingEnabled = true;
-            this.cmb_patient.Location = new System.Drawing.Point(79, 96);
+            this.cmb_patient.Location = new System.Drawing.Point(117, 140);
             this.cmb_patient.Name = "cmb_patient";
             this.cmb_patient.Size = new System.Drawing.Size(187, 21);
-            this.cmb_patient.TabIndex = 8;
+            this.cmb_patient.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(26, 92);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Doktor Seçimi";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 166);
+            this.label4.Location = new System.Drawing.Point(26, 246);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Saat";
+            this.label4.Text = "Randevu Saati";
+            // 
+            // dt_date
+            // 
+            this.dt_date.CustomFormat = "d/M/yyyy dddd";
+            this.dt_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dt_date.Location = new System.Drawing.Point(117, 192);
+            this.dt_date.Name = "dt_date";
+            this.dt_date.Size = new System.Drawing.Size(187, 20);
+            this.dt_date.TabIndex = 3;
             // 
             // cmb_clock
             // 
@@ -286,73 +429,24 @@ namespace HospitalManagement
             "16:00",
             "16:30",
             "17:00"});
-            this.cmb_clock.Location = new System.Drawing.Point(79, 163);
+            this.cmb_clock.Location = new System.Drawing.Point(117, 243);
             this.cmb_clock.Name = "cmb_clock";
             this.cmb_clock.Size = new System.Drawing.Size(187, 21);
-            this.cmb_clock.TabIndex = 6;
+            this.cmb_clock.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 136);
+            this.label3.Location = new System.Drawing.Point(26, 198);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Tarih";
-            // 
-            // dt_date
-            // 
-            this.dt_date.CustomFormat = "d/M/yyyy dddd";
-            this.dt_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dt_date.Location = new System.Drawing.Point(79, 130);
-            this.dt_date.Name = "dt_date";
-            this.dt_date.Size = new System.Drawing.Size(187, 20);
-            this.dt_date.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Doktor";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Branş";
-            // 
-            // cmb_doctor
-            // 
-            this.cmb_doctor.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_doctor.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_doctor.Enabled = false;
-            this.cmb_doctor.FormattingEnabled = true;
-            this.cmb_doctor.Location = new System.Drawing.Point(79, 62);
-            this.cmb_doctor.Name = "cmb_doctor";
-            this.cmb_doctor.Size = new System.Drawing.Size(187, 21);
-            this.cmb_doctor.TabIndex = 1;
-            // 
-            // cmb_branch
-            // 
-            this.cmb_branch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_branch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_branch.FormattingEnabled = true;
-            this.cmb_branch.Location = new System.Drawing.Point(79, 28);
-            this.cmb_branch.Name = "cmb_branch";
-            this.cmb_branch.Size = new System.Drawing.Size(187, 21);
-            this.cmb_branch.TabIndex = 0;
-            this.cmb_branch.SelectedIndexChanged += new System.EventHandler(this.cmb_branch_SelectedIndexChanged);
+            this.label3.Text = "Randevu Tarihi";
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage_Appointment);
             this.tabControl1.Controls.Add(this.tabPage_Patient);
+            this.tabControl1.Controls.Add(this.tabPage_Appointment);
             this.tabControl1.Controls.Add(this.tabPage_Doctor);
             this.tabControl1.Controls.Add(this.tabPage_Secreter);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -362,41 +456,7 @@ namespace HospitalManagement
             this.tabControl1.Size = new System.Drawing.Size(915, 542);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // btn_patient_update
-            // 
-            this.btn_patient_update.Location = new System.Drawing.Point(24, 315);
-            this.btn_patient_update.Name = "btn_patient_update";
-            this.btn_patient_update.Size = new System.Drawing.Size(280, 37);
-            this.btn_patient_update.TabIndex = 13;
-            this.btn_patient_update.Text = "Hasta Güncelle";
-            this.btn_patient_update.UseVisualStyleBackColor = true;
-            this.btn_patient_update.Click += new System.EventHandler(this.btn_patient_update_Click);
-            // 
-            // btn_patient_delete
-            // 
-            this.btn_patient_delete.Location = new System.Drawing.Point(24, 384);
-            this.btn_patient_delete.Name = "btn_patient_delete";
-            this.btn_patient_delete.Size = new System.Drawing.Size(280, 37);
-            this.btn_patient_delete.TabIndex = 14;
-            this.btn_patient_delete.Text = "Hasta Sil";
-            this.btn_patient_delete.UseVisualStyleBackColor = true;
-            // 
-            // txt_patient_search
-            // 
-            this.txt_patient_search.Location = new System.Drawing.Point(701, 20);
-            this.txt_patient_search.Name = "txt_patient_search";
-            this.txt_patient_search.Size = new System.Drawing.Size(187, 20);
-            this.txt_patient_search.TabIndex = 15;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(672, 23);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(23, 13);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Ara";
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
             // Form1
             // 
@@ -414,6 +474,9 @@ namespace HospitalManagement
             this.groupBox1.PerformLayout();
             this.tabPage_Appointment.ResumeLayout(false);
             this.tabPage_Appointment.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtGViewAppointment)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -436,7 +499,7 @@ namespace HospitalManagement
         private System.Windows.Forms.ComboBox cmb_patient;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmb_clock;
-        private System.Windows.Forms.Button btn_appointment;
+        private System.Windows.Forms.Button btn_appointment_create;
         private System.Windows.Forms.Button btn_patient_save;
         private System.Windows.Forms.TextBox txt_patient_email;
         private System.Windows.Forms.Label label8;
@@ -452,6 +515,11 @@ namespace HospitalManagement
         private System.Windows.Forms.TextBox txt_patient_search;
         private System.Windows.Forms.Button btn_patient_delete;
         private System.Windows.Forms.Button btn_patient_update;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DataGridView dtGViewAppointment;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btn_appointment_delete;
     }
 }
 

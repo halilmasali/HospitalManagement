@@ -13,7 +13,7 @@ namespace HospitalManagement.BusinnesLayer
     {
         public static List<Patient> getPatients()
         {
-            OleDbCommand sqlCommand = Database.SqlCommand("select * from Patient");
+            OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Patient");
             OleDbDataReader dataReader = sqlCommand.ExecuteReader();
             List<Patient> patients = new List<Patient>();
 
@@ -36,8 +36,8 @@ namespace HospitalManagement.BusinnesLayer
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
-                    "insert into Patient (PName,PLastName,PhoneNumber,Email,[RecordDate]) " +
-                    "values(@PName,@PLastName,@PhoneNumber,@Email,@RecordDate)");
+                    "INSERT INTO Patient (PName,PLastName,PhoneNumber,Email,[RecordDate]) " +
+                    "VALUES(@PName,@PLastName,@PhoneNumber,@Email,@RecordDate)");
                 sqlCommand.Parameters.AddWithValue("@PName", name);
                 sqlCommand.Parameters.AddWithValue("@PLastName", lastname);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
@@ -47,20 +47,20 @@ namespace HospitalManagement.BusinnesLayer
                     return true;
             }
             catch (OleDbException exception)
-            {                
+            {
                 System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
                 return false;
             }
             return false;
         }
 
-        public bool UpdatePatientRecord(int id,string name, string lastname, string phoneNum, string email)
+        public bool UpdatePatientRecord(int id, string name, string lastname, string phoneNum, string email)
         {
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
                     "UPDATE Patient SET PName = @PName,PLastName = @PLastName," +
-                    " PhoneNumber = @PhoneNumber, Email = @Email where PatientId = @PatientId");
+                    " PhoneNumber = @PhoneNumber, Email = @Email WHERE PatientId = @PatientId");
                 sqlCommand.Parameters.AddWithValue("@PName", name);
                 sqlCommand.Parameters.AddWithValue("@PLastName", lastname);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
@@ -77,13 +77,54 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public DataTable GetPatientsList()
+        public bool DeletePatientRecord(int id)
         {
-            OleDbCommand sqlCommand = Database.SqlCommand("select * from Patient");               
-            DataTable table = new DataTable();
-            table.Load(sqlCommand.ExecuteReader());
-            return table;
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand("DELETE FROM Patient WHERE PatientId = @PatientId");
+                sqlCommand.Parameters.AddWithValue("@PatientId", id);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return false;
+            }
+            return false;
         }
 
+        public DataTable SearchPatientRecord(string searchValue)
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Patient" +
+                    " WHERE PName + PLastName + PhoneNumber + Email LIKE '%" + searchValue + "%'");
+                DataTable table = new DataTable();
+                table.Load(sqlCommand.ExecuteReader());
+                return table;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return null;
+            }
+        }
+
+        public DataTable GetPatientsList()
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Patient");
+                DataTable table = new DataTable();
+                table.Load(sqlCommand.ExecuteReader());
+                return table;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return null;
+            }
+        }
     }
 }
