@@ -13,42 +13,19 @@ namespace HospitalManagement.BusinnesLayer
 {
     class SecretaryControl
     {
-        int secreteryId = 1;
-        public ArrayList getDoctorsForCmb(int branchId)
+        public List<Doctor> getDoctorsByBranch(int branchId)
         {
-            ArrayList list = new ArrayList();
+            List<Doctor> list = new List<Doctor>();
             List<Doctor> doctors = DoctorControl.getDoctors();
             foreach (Doctor item in doctors)
             {
                 if (item.BranchId == branchId)
                 {
-                    list.Add(item.DoctorId + "-" + item.DName + " " + item.DLastName);
+                    list.Add(item);
                 }
             }
             return list;
-        }
-
-        public ArrayList getBranchsForCmb()
-        {
-            ArrayList list = new ArrayList();
-            List<Branch> branchs = BranchControl.getBranchs();
-            foreach (Branch item in branchs)
-            {
-                list.Add(item.BranchName);
-            }
-            return list;
-        }
-
-        public ArrayList getPatientsForCmb()
-        {
-            ArrayList list = new ArrayList();
-            List<Patient> patients = PatientController.getPatients();
-            foreach (Patient item in patients)
-            {
-                list.Add(item.PatientId + "-" + item.PName + " " + item.PLastName);
-            }
-            return list;
-        }
+        }      
 
         public int GetBranchIdFromName(string branchName)
         {
@@ -59,18 +36,17 @@ namespace HospitalManagement.BusinnesLayer
             return dataReader.GetInt32(0);
         }
 
-        public void CreateAppointment(int branchId, int doctorId, int patientId, DateTime dateTime)
+        public void CreateAppointment(int branchId, int doctorId, int patientId,int secreteryId, DateTime dateTime)
         {
             OleDbCommand sqlCommand = Database.SqlCommand(
-                "insert into Appointment(DoctorId,SecretaryId,PatientId,BranchId,DateTime) " +
-                "values(@DoctorId,@SecretaryId,@PatientId,@BranchId,@DateTime");
+                "insert into Appointment (DoctorId,SecretaryId,PatientId,BranchId,[DateTime]) " +
+                "values(@DoctorId,@SecretaryId,@PatientId,@BranchId,@DateTime)");
             sqlCommand.Parameters.AddWithValue("@DoctorId", doctorId);
             sqlCommand.Parameters.AddWithValue("@SecretaryId", secreteryId);
-            sqlCommand.Parameters.AddWithValue("@BranchId", branchId);
-            sqlCommand.Parameters.AddWithValue("@DateTime", dateTime);
             sqlCommand.Parameters.AddWithValue("@PatientId", patientId);
-            sqlCommand.ExecuteReader();
-
+            sqlCommand.Parameters.AddWithValue("@BranchId", branchId);
+            sqlCommand.Parameters.AddWithValue("@DateTime", dateTime);            
+            sqlCommand.ExecuteNonQuery();
         }
 
 

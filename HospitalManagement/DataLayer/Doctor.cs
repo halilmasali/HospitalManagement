@@ -15,7 +15,7 @@ namespace HospitalManagement.DataLayer
         public string PhoneNum { get; set; }
 
 
-        public Doctor(int DoctorId,string DName,string DLastName,int BranchId,string PhoneNum)
+        public Doctor(int DoctorId, string DName, string DLastName, int BranchId, string PhoneNum)
         {
             this.DoctorId = DoctorId;
             this.DName = DName;
@@ -23,5 +23,10 @@ namespace HospitalManagement.DataLayer
             this.BranchId = BranchId;
             this.PhoneNum = PhoneNum;
         }
-    }    
+
+        public override string ToString()
+        {
+            return DoctorId + " " + DName + " " + DLastName;
+        }
+    }
 }

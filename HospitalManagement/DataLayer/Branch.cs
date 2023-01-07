@@ -16,5 +16,10 @@ namespace HospitalManagement.DataLayer
             this.BranchId = BranchId;
             this.BranchName = BranchName;
         }
+
+        public override string ToString()
+        {
+            return BranchId + " " + BranchName;
+        }
     }
 }

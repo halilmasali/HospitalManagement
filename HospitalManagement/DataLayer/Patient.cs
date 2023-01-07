@@ -22,5 +22,10 @@ namespace HospitalManagement.DataLayer
             this.PhoneNum = PhoneNum;
             this.RecordDate = RecordDate;
         }
+
+        public override string ToString()
+        {
+            return PatientId + " " + PName + " " + PLastName;
+        }
     }
 }
