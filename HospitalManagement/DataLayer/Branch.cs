@@ -19,7 +19,7 @@ namespace HospitalManagement.DataLayer
 
         public override string ToString()
         {
-            return BranchId + " " + BranchName;
+            return BranchName;
         }
     }
 }

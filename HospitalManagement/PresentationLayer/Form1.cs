@@ -1,13 +1,6 @@
 ﻿using HospitalManagement.BusinnesLayer;
 using HospitalManagement.DataLayer;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HospitalManagement
@@ -21,14 +14,17 @@ namespace HospitalManagement
         SecretaryControl secretary;
         PatientController patient;
         AppointmentController appointment;
-        int secretaryId = 1, patientId = 0;
+        DoctorControl doctor;
+        int secretaryId = 0, patientId = 0, appointmentId = 0, doctorId = 0;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             secretary = new SecretaryControl();
             patient = new PatientController();
             appointment = new AppointmentController();
+            doctor = new DoctorControl();
             tabControl1.SelectedTab = tabPage_Appointment;
+            dt_date.MinDate = DateTime.Today;
         }
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
@@ -45,23 +41,17 @@ namespace HospitalManagement
             {
                 dtGViewPatient.DataSource = patient.GetPatientsList();
             }
+            else if (tabControl1.SelectedTab == tabPage_Doctor)
+            {
+                dtGViewDoctor.DataSource = doctor.GetDoktorsList();
+                cmb_doctor_branch.Items.Clear();
+                cmb_doctor_branch.Items.AddRange(BranchControl.getBranchs().ToArray());
+            }
+            else if (tabControl1.SelectedTab == tabPage_Secreter)
+            {
+                dtGViewSecreter.DataSource = secretary.GetSecretarysList();
+            }
         }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //if (tabControl1.SelectedTab == tabPage_Appointment)
-            //{
-            //    //dtGViewAppointment.DataSource = 
-            //    cmb_branch.Items.AddRange(BranchControl.getBranchs().ToArray());
-            //    cmb_patient.Items.AddRange(PatientController.getPatients().ToArray());
-            //}
-            //else if (tabControl1.SelectedTab == tabPage_Patient)
-            //{
-            //    dtGViewPatient.DataSource = patient.GetPatientsList();
-            //}
-        }
-       
-
 
         #region Appointment Tab View Code
         private void cmb_branch_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,7 +61,7 @@ namespace HospitalManagement
             if (cmb_branch.SelectedItem != null)
             {
                 cmb_doctor.Items.AddRange(
-                    secretary.getDoctorsByBranch(
+                    doctor.getDoctorsByBranch(
                         ((Branch)cmb_branch.SelectedItem).BranchId).ToArray());
                 cmb_doctor.Enabled = true;
             }
@@ -87,9 +77,67 @@ namespace HospitalManagement
                 int doctorId = ((Doctor)cmb_doctor.SelectedItem).DoctorId;
                 int patientId = ((Patient)cmb_patient.SelectedItem).PatientId;
                 DateTime dateTime = dt_date.Value.Date + TimeSpan.Parse(cmb_clock.SelectedItem.ToString());
-                secretary.CreateAppointment(branchId, doctorId, patientId, secretaryId, dateTime);
+                appointment.CreateAppointment(branchId, doctorId, patientId, 1, dateTime);
+                AppointmentFormClear();
             }
         }
+
+        private void txt_appointment_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)Keys.Enter)
+            {
+                if (txt_appointment_search.Text != null)
+                {
+                    dtGViewAppointment.DataSource = appointment.SearchAppointmentRecord(txt_appointment_search.Text);
+                }
+            }
+        }
+        private void dtGViewAppointment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                if (dtGViewAppointment.Rows[e.RowIndex].Cells[0].Value != null)
+                {
+                    appointmentId = Convert.ToInt32(dtGViewAppointment.Rows[e.RowIndex].Cells[0].Value);
+                }
+            }
+        }
+
+        private void btn_appointment_delete_Click(object sender, EventArgs e)
+        {
+            if (appointmentId > 0)
+            {
+                DialogResult dialog = MessageBox.Show(appointmentId + " numaralı randevuyu iptal etmek istiyor musunuz?",
+                    "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialog == DialogResult.Yes)
+                {
+                    if (appointment.DeleteAppointmentRecord(appointmentId))
+                    {
+                        MessageBox.Show(appointmentId + " numaralı randevu iptal edildi.", "Bilgi",
+                              MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AppointmentFormClear();
+                    }
+                }
+                else
+                    MessageBox.Show("Randevu iptal etme işlemi iptal edildi.", "Bilgi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("İptal etmek istediğiniz randevu için tablodan randevu seçiniz." +
+                    "(Seçim işlemini randevu bilgisine çift tıklayarak yapabilirsiniz.)", "Bilgi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void AppointmentFormClear()
+        {
+            cmb_branch.Text = "";
+            cmb_doctor.Text = "";
+            cmb_patient.Text = "";
+            dt_date.Value = DateTime.Today;
+            appointmentId = 0;
+            dtGViewAppointment.DataSource = appointment.GetAppointmentList();
+        }
+
         #endregion
 
         #region Patient Tab View Code 
@@ -111,7 +159,7 @@ namespace HospitalManagement
         private void btn_patient_update_Click(object sender, EventArgs e)
         {
             if (txt_patient_name.Text != "" && txt_patient_lastname.Text != "" &&
-                txt_patient_email.Text != "" && txt_patient_phone.Text != "")
+                txt_patient_email.Text != "" && txt_patient_phone.Text != "" && patientId > 0)
             {
 
                 if (patient.UpdatePatientRecord(patientId, txt_patient_name.Text,
@@ -162,7 +210,6 @@ namespace HospitalManagement
                 }
             }
         }
-
         private void txt_patient_search_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (Char)Keys.Enter)
@@ -185,6 +232,191 @@ namespace HospitalManagement
         }
         #endregion
 
+        #region Doctor Tab View Code
+        private void btn_doctor_save_Click(object sender, EventArgs e)
+        {
+            if (txt_doctor_name.Text != "" && txt_doctor_lastname.Text != "" &&
+                txt_doctor_phone.Text != "" && cmb_doctor_branch.SelectedItem != null)
+            {
+                int branchId = ((Branch)cmb_doctor_branch.SelectedItem).BranchId;
+
+                if (doctor.AddDoctorRecord(txt_doctor_name.Text, txt_doctor_lastname.Text,
+                    branchId, txt_doctor_phone.Text))
+                {
+                    MessageBox.Show("Kayıt Başarılı");
+                    DoctorFormClear();
+                }
+            }
+        }
+
+        private void dtGViewDoctor_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                if (dtGViewDoctor.Rows[e.RowIndex].Cells[0].Value != null)
+                {
+                    doctorId = Convert.ToInt32(dtGViewDoctor.Rows[e.RowIndex].Cells[0].Value);
+                    txt_doctor_name.Text = dtGViewDoctor.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    txt_doctor_lastname.Text = dtGViewDoctor.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    cmb_doctor_branch.SelectedItem = cmb_doctor_branch.Items[cmb_doctor_branch.FindStringExact(
+                        dtGViewDoctor.Rows[e.RowIndex].Cells[3].Value.ToString())];
+                    txt_doctor_phone.Text = dtGViewDoctor.Rows[e.RowIndex].Cells[4].Value.ToString();
+                }
+            }
+        }
+
+        private void txt_doctor_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)Keys.Enter)
+            {
+                if (txt_doctor_search.Text != null)
+                {
+                    dtGViewDoctor.DataSource = doctor.SearchDoctorRecord(txt_doctor_search.Text);
+                }
+            }
+        }
+        private void btn_doctor_update_Click(object sender, EventArgs e)
+        {
+            if (txt_doctor_name.Text != "" && txt_doctor_lastname.Text != "" &&
+               txt_doctor_phone.Text != "" && cmb_doctor_branch.SelectedItem != null && doctorId > 0)
+            {
+                int branchId = ((Branch)cmb_doctor_branch.SelectedItem).BranchId;
+
+                if (doctor.UpdateDoctorRecord(doctorId, txt_doctor_name.Text,
+                    txt_doctor_lastname.Text, branchId, txt_doctor_phone.Text))
+                {
+                    MessageBox.Show("Güncelleme Başarılı");
+                    DoctorFormClear();
+                }
+            }
+        }
+
+        private void btn_doctor_delete_Click(object sender, EventArgs e)
+        {
+            if (doctorId > 0)
+            {
+                DialogResult dialog = MessageBox.Show(doctorId + " numaralı doktoru silmek istiyor musunuz?",
+                    "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialog == DialogResult.Yes)
+                {
+                    if (doctor.DeleteDoctorRecord(doctorId))
+                    {
+                        MessageBox.Show(doctorId + " numaralı doktor silindi.", "Bilgi",
+                              MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DoctorFormClear();
+                    }
+                }
+                else
+                    MessageBox.Show("Silme işlemi iptal edildi.", "Bilgi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Silmek istediğiniz veri için tablodan doktor seçiniz." +
+                    "(Seçim işlemini doktor bilgisine çift tıklayarak yapabilirsiniz.)", "Bilgi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void DoctorFormClear()
+        {
+            doctorId = 0;
+            txt_doctor_name.Text = "";
+            txt_doctor_lastname.Text = "";
+            txt_doctor_phone.Text = "";
+            cmb_doctor_branch.Text = "";
+            dtGViewDoctor.DataSource = doctor.GetDoktorsList();
+        }
+        #endregion
+
+        #region Secretary Tab View Code
+        private void btn_secreter_save_Click(object sender, EventArgs e)
+        {
+            if (txt_secreter_name.Text != "" && txt_secreter_lastname.Text != "" &&
+                 txt_secreter_phone.Text != "")
+            {
+
+                if (secretary.AddSecretaryRecord(txt_secreter_name.Text, txt_secreter_lastname.Text,
+                    txt_secreter_phone.Text))
+                {
+                    MessageBox.Show("Kayıt Başarılı");
+                    SecretaryFormClear();
+                }
+            }
+        }
+
+        private void txt_secreter_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)Keys.Enter)
+            {
+                if (txt_secreter_search.Text != null)
+                {
+                    dtGViewSecreter.DataSource = secretary.SearchSecretaryRecord(txt_secreter_search.Text);
+                }
+            }
+        }
+
+        private void dtGViewSecreter_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+            {
+                if (dtGViewSecreter.Rows[e.RowIndex].Cells[0].Value != null)
+                {
+                    secretaryId = Convert.ToInt32(dtGViewSecreter.Rows[e.RowIndex].Cells[0].Value);
+                    txt_secreter_name.Text = dtGViewSecreter.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    txt_secreter_lastname.Text = dtGViewSecreter.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    txt_secreter_phone.Text = dtGViewSecreter.Rows[e.RowIndex].Cells[3].Value.ToString();
+                }
+            }
+        }
+
+        private void btn_secreter_update_Click(object sender, EventArgs e)
+        {
+            if (txt_secreter_name.Text != "" && txt_secreter_lastname.Text != "" &&
+                 txt_secreter_phone.Text != "" && secretaryId > 0)
+            {
+
+                if (secretary.UpdateSecretaryRecord(secretaryId, txt_secreter_name.Text,
+                    txt_secreter_lastname.Text, txt_secreter_phone.Text))
+                {
+                    MessageBox.Show("Güncelleme Başarılı");
+                    SecretaryFormClear();
+                }
+            }
+        }
+
+        private void btn_secreter_delete_Click(object sender, EventArgs e)
+        {
+            if (secretaryId > 0)
+            {
+                DialogResult dialog = MessageBox.Show(secretaryId + " numaralı sekreteri silmek istiyor musunuz?",
+                    "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialog == DialogResult.Yes)
+                {
+                    if (secretary.DeleteSecretaryRecord(secretaryId))
+                    {
+                        MessageBox.Show(secretaryId + " numaralı sekreter silindi.", "Bilgi",
+                              MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        SecretaryFormClear();
+                    }
+                }
+                else
+                    MessageBox.Show("Silme işlemi iptal edildi.", "Bilgi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Silmek istediğiniz veri için tablodan sekreter seçiniz." +
+                    "(Seçim işlemini sekreter bilgisine çift tıklayarak yapabilirsiniz.)", "Bilgi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void SecretaryFormClear()
+        {
+            secretaryId = 0;
+            txt_secreter_name.Text = "";
+            txt_secreter_lastname.Text = "";
+            txt_secreter_phone.Text = "";
+            dtGViewSecreter.DataSource = secretary.GetSecretarysList();
+        }
+        #endregion
 
     }
 }

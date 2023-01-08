@@ -12,42 +12,98 @@ namespace HospitalManagement.BusinnesLayer
 {
     class SecretaryControl
     {
-        public List<Doctor> getDoctorsByBranch(int branchId)
+        public bool AddSecretaryRecord(string name, string lastname, string phoneNum)
         {
-            List<Doctor> list = new List<Doctor>();
-            List<Doctor> doctors = DoctorControl.getDoctors();
-            foreach (Doctor item in doctors)
+            try
             {
-                if (item.BranchId == branchId)
-                {
-                    list.Add(item);
-                }
+                OleDbCommand sqlCommand = Database.SqlCommand(
+                    "INSERT INTO Secretary (SName,SLastName,PhoneNumber) " +
+                    "VALUES(@SName,@SLastName,@PhoneNumber)");
+                sqlCommand.Parameters.AddWithValue("@SName", name);
+                sqlCommand.Parameters.AddWithValue("@SLastName", lastname);
+                sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    return true;
             }
-            return list;
-        }      
-
-        public int GetBranchIdFromName(string branchName)
-        {
-            OleDbCommand sqlCommand = Database.SqlCommand("select BranchId From Branch where Branch=@branch");
-            sqlCommand.Parameters.AddWithValue("@branch", branchName);
-            OleDbDataReader dataReader = sqlCommand.ExecuteReader();
-            dataReader.Read();
-            return dataReader.GetInt32(0);
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return false;
+            }
+            return false;
         }
 
-        public void CreateAppointment(int branchId, int doctorId, int patientId,int secreteryId, DateTime dateTime)
+        public bool UpdateSecretaryRecord(int id, string name, string lastname, string phoneNum)
         {
-            OleDbCommand sqlCommand = Database.SqlCommand(
-                "insert into Appointment (DoctorId,SecretaryId,PatientId,BranchId,[DateTime]) " +
-                "values(@DoctorId,@SecretaryId,@PatientId,@BranchId,@DateTime)");
-            sqlCommand.Parameters.AddWithValue("@DoctorId", doctorId);
-            sqlCommand.Parameters.AddWithValue("@SecretaryId", secreteryId);
-            sqlCommand.Parameters.AddWithValue("@PatientId", patientId);
-            sqlCommand.Parameters.AddWithValue("@BranchId", branchId);
-            sqlCommand.Parameters.AddWithValue("@DateTime", dateTime);            
-            sqlCommand.ExecuteNonQuery();
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand(
+                    "UPDATE Secretary SET SName = @SName,SLastName = @SLastName," +
+                    " PhoneNumber = @PhoneNumber WHERE SecretaryId = @SecretaryId");
+                sqlCommand.Parameters.AddWithValue("@SName", name);
+                sqlCommand.Parameters.AddWithValue("@SLastName", lastname);
+                sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
+                sqlCommand.Parameters.AddWithValue("@SecretaryId", id);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return false;
+            }
+            return false;
         }
 
+        public bool DeleteSecretaryRecord(int id)
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand("DELETE FROM Secretary WHERE SecretaryId = @SecretaryId");
+                sqlCommand.Parameters.AddWithValue("@SecretaryId", id);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return false;
+            }
+            return false;
+        }
+
+        public DataTable SearchSecretaryRecord(string searchValue)
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Secretary" +
+                    " WHERE SName + SLastName + PhoneNumber LIKE '%" + searchValue + "%'");
+                DataTable table = new DataTable();
+                table.Load(sqlCommand.ExecuteReader());
+                return table;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return null;
+            }
+        }
+
+        public DataTable GetSecretarysList()
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Secretary");
+                DataTable table = new DataTable();
+                table.Load(sqlCommand.ExecuteReader());
+                return table;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return null;
+            }
+        }
 
 
     }

@@ -26,7 +26,7 @@ namespace HospitalManagement.DataLayer
 
         public override string ToString()
         {
-            return DoctorId + " " + DName + " " + DLastName;
+            return DName + " " + DLastName;
         }
     }
 }

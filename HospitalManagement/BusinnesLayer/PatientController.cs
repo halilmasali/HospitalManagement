@@ -22,7 +22,7 @@ namespace HospitalManagement.BusinnesLayer
                 Patient item = new Patient(
                     Convert.ToInt32(dataReader[0]),
                     dataReader[1].ToString(),
-                    dataReader[2].ToString(),
+                    dataReader[2].ToString(), 
                     dataReader[3].ToString(),
                     dataReader[4].ToString());
                 patients.Add(item);
