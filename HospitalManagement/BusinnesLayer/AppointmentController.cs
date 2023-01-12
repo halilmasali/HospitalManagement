@@ -11,6 +11,8 @@ namespace HospitalManagement.BusinnesLayer
 {
     class AppointmentController
     {
+
+        //Randevu listesini geriye döndürür
         public DataTable GetAppointmentList()
         {
             try

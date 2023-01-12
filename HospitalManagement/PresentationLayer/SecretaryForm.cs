@@ -5,16 +5,16 @@ using System.Windows.Forms;
 
 namespace HospitalManagement
 {
-    public partial class Form1 : Form
+    public partial class SecretaryForm : Form
     {
-        public Form1()
+        public SecretaryForm()
         {
             InitializeComponent();
         }
-        SecretaryControl secretary;
+        SecretaryControl secretary; //secretary parametresi oluşturulduç.
         PatientController patient;
         AppointmentController appointment;
-        DoctorControl doctor;
+        DoctorControl doctor;//doctor paramatresi oluşturuldu
         int secretaryId = 0, patientId = 0, appointmentId = 0, doctorId = 0;
 
         private void Form1_Load(object sender, EventArgs e)
