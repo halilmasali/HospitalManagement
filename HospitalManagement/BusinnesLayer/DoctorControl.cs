@@ -153,5 +153,27 @@ namespace HospitalManagement.BusinnesLayer
                 return null;
             }
         }
+
+        public bool DoctorAuth(string phone, string password)
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT PhoneNumber,DPassword FROM Doctor");
+                OleDbDataReader dataReader = sqlCommand.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    if (dataReader[0].ToString() == phone && dataReader[1].ToString() == password)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return false;
+            }
+        }
     }
 }

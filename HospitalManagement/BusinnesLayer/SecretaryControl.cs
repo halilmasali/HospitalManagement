@@ -105,6 +105,26 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-
+        public bool SecretaryAuth(string phone, string password)
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT PhoneNumber,SPassword FROM Secretary");
+                OleDbDataReader dataReader = sqlCommand.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    if (dataReader[0].ToString() == phone && dataReader[1].ToString() == password)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return false;
+            }
+        }
     }
 }

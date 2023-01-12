@@ -32,6 +32,13 @@ namespace HospitalManagement.PresentationLayer
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btn_doctor = new System.Windows.Forms.Button();
             this.btn_secretary = new System.Windows.Forms.Button();
+            this.grp_auth = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_password = new System.Windows.Forms.TextBox();
+            this.btn_auth = new System.Windows.Forms.Button();
+            this.txt_phoneNum = new System.Windows.Forms.MaskedTextBox();
+            this.grp_auth.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_doctor
@@ -63,11 +70,70 @@ namespace HospitalManagement.PresentationLayer
             this.btn_secretary.UseVisualStyleBackColor = true;
             this.btn_secretary.Click += new System.EventHandler(this.btn_secretary_Click);
             // 
+            // grp_auth
+            // 
+            this.grp_auth.Controls.Add(this.txt_phoneNum);
+            this.grp_auth.Controls.Add(this.btn_auth);
+            this.grp_auth.Controls.Add(this.txt_password);
+            this.grp_auth.Controls.Add(this.label2);
+            this.grp_auth.Controls.Add(this.label1);
+            this.grp_auth.Location = new System.Drawing.Point(12, 13);
+            this.grp_auth.Name = "grp_auth";
+            this.grp_auth.Size = new System.Drawing.Size(347, 306);
+            this.grp_auth.TabIndex = 2;
+            this.grp_auth.TabStop = false;
+            this.grp_auth.Text = "Kullanıcı Girişi";
+            this.grp_auth.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(35, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Telefon Numarası";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(35, 133);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Şifre";
+            // 
+            // txt_password
+            // 
+            this.txt_password.Location = new System.Drawing.Point(146, 130);
+            this.txt_password.Name = "txt_password";
+            this.txt_password.Size = new System.Drawing.Size(169, 20);
+            this.txt_password.TabIndex = 3;
+            // 
+            // btn_auth
+            // 
+            this.btn_auth.Location = new System.Drawing.Point(38, 209);
+            this.btn_auth.Name = "btn_auth";
+            this.btn_auth.Size = new System.Drawing.Size(277, 46);
+            this.btn_auth.TabIndex = 4;
+            this.btn_auth.Text = "Oturum Aç";
+            this.btn_auth.UseVisualStyleBackColor = true;
+            this.btn_auth.Click += new System.EventHandler(this.btn_auth_Click);
+            // 
+            // txt_phoneNum
+            // 
+            this.txt_phoneNum.Location = new System.Drawing.Point(146, 64);
+            this.txt_phoneNum.Mask = "(999) 000-0000";
+            this.txt_phoneNum.Name = "txt_phoneNum";
+            this.txt_phoneNum.Size = new System.Drawing.Size(169, 20);
+            this.txt_phoneNum.TabIndex = 5;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 331);
+            this.Controls.Add(this.grp_auth);
             this.Controls.Add(this.btn_doctor);
             this.Controls.Add(this.btn_secretary);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -75,6 +141,8 @@ namespace HospitalManagement.PresentationLayer
             this.MaximumSize = new System.Drawing.Size(390, 370);
             this.Name = "MainForm";
             this.Text = "Hastane Randevu Sistemi";
+            this.grp_auth.ResumeLayout(false);
+            this.grp_auth.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -83,5 +151,11 @@ namespace HospitalManagement.PresentationLayer
 
         private System.Windows.Forms.Button btn_secretary;
         private System.Windows.Forms.Button btn_doctor;
+        private System.Windows.Forms.GroupBox grp_auth;
+        private System.Windows.Forms.Button btn_auth;
+        private System.Windows.Forms.TextBox txt_password;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MaskedTextBox txt_phoneNum;
     }
 }
