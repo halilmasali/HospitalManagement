@@ -101,6 +101,7 @@ namespace HospitalManagement
                 if (dtGViewAppointment.Rows[e.RowIndex].Cells[0].Value != null)
                 {
                     appointmentId = Convert.ToInt32(dtGViewAppointment.Rows[e.RowIndex].Cells[0].Value);
+                    //emir
                 }
             }
         }
