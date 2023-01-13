@@ -19,6 +19,7 @@ namespace HospitalManagement.BusinnesLayer
                 OleDbCommand sqlCommand = Database.SqlCommand(
                     "INSERT INTO Secretary (SName,SLastName,PhoneNumber,SPassword) " +
                     "VALUES(@SName,@SLastName,@PhoneNumber, @SPassword)");
+                //parametreler bağlanıyor.
                 sqlCommand.Parameters.AddWithValue("@SName", name);
                 sqlCommand.Parameters.AddWithValue("@SLastName", lastname);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
