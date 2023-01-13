@@ -102,7 +102,7 @@ namespace HospitalManagement
                 {
                     appointmentId = Convert.ToInt32(dtGViewAppointment.Rows[e.RowIndex].Cells[0].Value);
                     //emir
-                    // halil was here
+                    // halil was here but not happy.
                 }
             }
         }
