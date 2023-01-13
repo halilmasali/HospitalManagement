@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinnesLayer\AppointmentController.cs" />
+    <Compile Include="BusinnesLayer\AppointmentDetailsController.cs" />
     <Compile Include="BusinnesLayer\BranchControl.cs" />
     <Compile Include="BusinnesLayer\DoctorControl.cs" />
     <Compile Include="BusinnesLayer\PatientController.cs" />

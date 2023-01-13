@@ -33,11 +33,11 @@ namespace HospitalManagement.PresentationLayer
             this.btn_doctor = new System.Windows.Forms.Button();
             this.btn_secretary = new System.Windows.Forms.Button();
             this.grp_auth = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txt_password = new System.Windows.Forms.TextBox();
-            this.btn_auth = new System.Windows.Forms.Button();
             this.txt_phoneNum = new System.Windows.Forms.MaskedTextBox();
+            this.btn_auth = new System.Windows.Forms.Button();
+            this.txt_password = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.grp_auth.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,30 +85,14 @@ namespace HospitalManagement.PresentationLayer
             this.grp_auth.Text = "Kullanıcı Girişi";
             this.grp_auth.Visible = false;
             // 
-            // label1
+            // txt_phoneNum
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Telefon Numarası";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 133);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Şifre";
-            // 
-            // txt_password
-            // 
-            this.txt_password.Location = new System.Drawing.Point(146, 130);
-            this.txt_password.Name = "txt_password";
-            this.txt_password.Size = new System.Drawing.Size(169, 20);
-            this.txt_password.TabIndex = 3;
+            this.txt_phoneNum.Location = new System.Drawing.Point(146, 64);
+            this.txt_phoneNum.Mask = "(999) 000-0000";
+            this.txt_phoneNum.Name = "txt_phoneNum";
+            this.txt_phoneNum.Size = new System.Drawing.Size(169, 20);
+            this.txt_phoneNum.TabIndex = 5;
+            this.txt_phoneNum.Text = "5380279357";
             // 
             // btn_auth
             // 
@@ -120,13 +104,31 @@ namespace HospitalManagement.PresentationLayer
             this.btn_auth.UseVisualStyleBackColor = true;
             this.btn_auth.Click += new System.EventHandler(this.btn_auth_Click);
             // 
-            // txt_phoneNum
+            // txt_password
             // 
-            this.txt_phoneNum.Location = new System.Drawing.Point(146, 64);
-            this.txt_phoneNum.Mask = "(999) 000-0000";
-            this.txt_phoneNum.Name = "txt_phoneNum";
-            this.txt_phoneNum.Size = new System.Drawing.Size(169, 20);
-            this.txt_phoneNum.TabIndex = 5;
+            this.txt_password.Location = new System.Drawing.Point(146, 130);
+            this.txt_password.Name = "txt_password";
+            this.txt_password.Size = new System.Drawing.Size(169, 20);
+            this.txt_password.TabIndex = 3;
+            this.txt_password.Text = "1234";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(35, 133);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Şifre";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(35, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Telefon Numarası";
             // 
             // MainForm
             // 

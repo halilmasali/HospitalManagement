@@ -115,7 +115,15 @@ namespace HospitalManagement.BusinnesLayer
         {
             try
             {
-                OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Patient");
+                //OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Patient");
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT " +
+                    "PatientId AS [ID], " +
+                    "PName AS [Hasta Adı], " +
+                    "PLastName AS [Hasta Soyadı], " +
+                    "PhoneNumber AS [Telefon Numarası]," +
+                    "Email AS [E-mail]," +
+                    "RecordDate AS [Kayıt Tarihi]" +
+                    "FROM Patient");
                 DataTable table = new DataTable();
                 table.Load(sqlCommand.ExecuteReader());
                 return table;

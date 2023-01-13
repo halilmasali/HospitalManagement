@@ -24,7 +24,8 @@ namespace HospitalManagement.BusinnesLayer
                     dataReader[1].ToString(),
                     dataReader[2].ToString(),
                     Convert.ToInt32(dataReader[3]),
-                    dataReader[4].ToString());
+                    dataReader[4].ToString(),
+                    dataReader[5].ToString());
                 doctors.Add(item);
             }
             dataReader.Close();
@@ -45,17 +46,18 @@ namespace HospitalManagement.BusinnesLayer
             return list;
         }
 
-        public bool AddDoctorRecord(string name, string lastname, int branchId, string phoneNum)
+        public bool AddDoctorRecord(string name, string lastname, int branchId, string phoneNum, string password)
         {
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
-                    "INSERT INTO Doctor (DName,DLastName,BranchId,PhoneNumber) " +
-                    "VALUES(@DName,@DLastName,@BranchId,@PhoneNumber)");
+                    "INSERT INTO Doctor (DName,DLastName,BranchId,PhoneNumber,DPassword) " +
+                    "VALUES(@DName,@DLastName,@BranchId,@PhoneNumber,@DPassword)");
                 sqlCommand.Parameters.AddWithValue("@DName", name);
                 sqlCommand.Parameters.AddWithValue("@DLastName", lastname);
                 sqlCommand.Parameters.AddWithValue("@BranchId", branchId);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);                
+                sqlCommand.Parameters.AddWithValue("@DPassword", password);                
                 if (sqlCommand.ExecuteNonQuery() > 0)
                     return true;
             }
@@ -67,17 +69,18 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public bool UpdateDoctorRecord(int id, string name, string lastname, int branchId, string phoneNum)
+        public bool UpdateDoctorRecord(int id, string name, string lastname, int branchId, string phoneNum, string password)
         {
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
                     "UPDATE Doctor SET DName = @DName,DLastName = @DLastName," +
-                    " PhoneNumber = @PhoneNumber, BranchId = @BranchId WHERE DoctorId = @DoctorId");
+                    " PhoneNumber = @PhoneNumber, BranchId = @BranchId, DPassword = @DPassword WHERE DoctorId = @DoctorId");
                 sqlCommand.Parameters.AddWithValue("@PName", name);
                 sqlCommand.Parameters.AddWithValue("@PLastName", lastname);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
                 sqlCommand.Parameters.AddWithValue("@BranchId", branchId);
+                sqlCommand.Parameters.AddWithValue("@DPassword", password);
                 sqlCommand.Parameters.AddWithValue("@DoctorId", id);
                 if (sqlCommand.ExecuteNonQuery() > 0)
                     return true;
@@ -140,7 +143,8 @@ namespace HospitalManagement.BusinnesLayer
                     "Doctor.DName AS [Doktor Adı], " +
                     "Doctor.DLastName AS [Doktor Soyadı], " +
                     "Branch.Branch AS [Branş]," +
-                    "Doctor.PhoneNumber AS [Telefon Numarası]" +
+                    "Doctor.PhoneNumber AS [Telefon Numarası]," +
+                    "Doctor.DPassword AS [Şifre]" +
                     "FROM(Doctor " +
                     "INNER JOIN Branch ON Doctor.BranchId = Branch.BranchId)");
                 DataTable table = new DataTable();

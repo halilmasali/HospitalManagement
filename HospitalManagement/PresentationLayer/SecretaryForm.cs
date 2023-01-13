@@ -78,6 +78,8 @@ namespace HospitalManagement
                 int patientId = ((Patient)cmb_patient.SelectedItem).PatientId;
                 DateTime dateTime = dt_date.Value.Date + TimeSpan.Parse(cmb_clock.SelectedItem.ToString());
                 appointment.CreateAppointment(branchId, doctorId, patientId, 1, dateTime);
+                MessageBox.Show("Randevu oluşturuldu.", "Bilgi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 AppointmentFormClear();
             }
         }
@@ -236,12 +238,12 @@ namespace HospitalManagement
         private void btn_doctor_save_Click(object sender, EventArgs e)
         {
             if (txt_doctor_name.Text != "" && txt_doctor_lastname.Text != "" &&
-                txt_doctor_phone.Text != "" && cmb_doctor_branch.SelectedItem != null)
+                txt_doctor_phone.Text != "" && txt_doctor_password.Text != "" && cmb_doctor_branch.SelectedItem != null)
             {
                 int branchId = ((Branch)cmb_doctor_branch.SelectedItem).BranchId;
 
                 if (doctor.AddDoctorRecord(txt_doctor_name.Text, txt_doctor_lastname.Text,
-                    branchId, txt_doctor_phone.Text))
+                    branchId, txt_doctor_phone.Text, txt_doctor_password.Text))
                 {
                     MessageBox.Show("Kayıt Başarılı");
                     DoctorFormClear();
@@ -261,6 +263,7 @@ namespace HospitalManagement
                     cmb_doctor_branch.SelectedItem = cmb_doctor_branch.Items[cmb_doctor_branch.FindStringExact(
                         dtGViewDoctor.Rows[e.RowIndex].Cells[3].Value.ToString())];
                     txt_doctor_phone.Text = dtGViewDoctor.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    txt_doctor_password.Text = dtGViewDoctor.Rows[e.RowIndex].Cells[5].Value.ToString();
                 }
             }
         }
@@ -278,12 +281,12 @@ namespace HospitalManagement
         private void btn_doctor_update_Click(object sender, EventArgs e)
         {
             if (txt_doctor_name.Text != "" && txt_doctor_lastname.Text != "" &&
-               txt_doctor_phone.Text != "" && cmb_doctor_branch.SelectedItem != null && doctorId > 0)
+               txt_doctor_phone.Text != "" && txt_doctor_password.Text != "" && cmb_doctor_branch.SelectedItem != null && doctorId > 0)
             {
                 int branchId = ((Branch)cmb_doctor_branch.SelectedItem).BranchId;
 
                 if (doctor.UpdateDoctorRecord(doctorId, txt_doctor_name.Text,
-                    txt_doctor_lastname.Text, branchId, txt_doctor_phone.Text))
+                    txt_doctor_lastname.Text, branchId, txt_doctor_phone.Text, txt_doctor_password.Text))
                 {
                     MessageBox.Show("Güncelleme Başarılı");
                     DoctorFormClear();
@@ -322,6 +325,7 @@ namespace HospitalManagement
             txt_doctor_name.Text = "";
             txt_doctor_lastname.Text = "";
             txt_doctor_phone.Text = "";
+            txt_doctor_password.Text = "";
             cmb_doctor_branch.Text = "";
             dtGViewDoctor.DataSource = doctor.GetDoktorsList();
         }
@@ -335,7 +339,7 @@ namespace HospitalManagement
             {
 
                 if (secretary.AddSecretaryRecord(txt_secreter_name.Text, txt_secreter_lastname.Text,
-                    txt_secreter_phone.Text))
+                    txt_secreter_phone.Text, txt_secreter_password.Text))
                 {
                     MessageBox.Show("Kayıt Başarılı");
                     SecretaryFormClear();
@@ -364,6 +368,7 @@ namespace HospitalManagement
                     txt_secreter_name.Text = dtGViewSecreter.Rows[e.RowIndex].Cells[1].Value.ToString();
                     txt_secreter_lastname.Text = dtGViewSecreter.Rows[e.RowIndex].Cells[2].Value.ToString();
                     txt_secreter_phone.Text = dtGViewSecreter.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    txt_secreter_password.Text = dtGViewSecreter.Rows[e.RowIndex].Cells[4].Value.ToString();
                 }
             }
         }
@@ -371,11 +376,11 @@ namespace HospitalManagement
         private void btn_secreter_update_Click(object sender, EventArgs e)
         {
             if (txt_secreter_name.Text != "" && txt_secreter_lastname.Text != "" &&
-                 txt_secreter_phone.Text != "" && secretaryId > 0)
+                 txt_secreter_phone.Text != "" && txt_secreter_password.Text != "" &&secretaryId > 0)
             {
 
                 if (secretary.UpdateSecretaryRecord(secretaryId, txt_secreter_name.Text,
-                    txt_secreter_lastname.Text, txt_secreter_phone.Text))
+                    txt_secreter_lastname.Text, txt_secreter_phone.Text, txt_secreter_password.Text))
                 {
                     MessageBox.Show("Güncelleme Başarılı");
                     SecretaryFormClear();
@@ -414,6 +419,7 @@ namespace HospitalManagement
             txt_secreter_name.Text = "";
             txt_secreter_lastname.Text = "";
             txt_secreter_phone.Text = "";
+            txt_secreter_password.Text = "";
             dtGViewSecreter.DataSource = secretary.GetSecretarysList();
         }
         #endregion

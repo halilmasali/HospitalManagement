@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagement.BusinnesLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,27 @@ namespace HospitalManagement.PresentationLayer
         public DoctorForm()
         {
             InitializeComponent();
+        }
+
+        AppointmentDetailsController appointmentDetails;
+        private void DoctorForm_Load(object sender, EventArgs e)
+        {
+            appointmentDetails = new AppointmentDetailsController();
+            tabControl1.SelectedTab = tabPage_appointmentDetails;
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (tabControl1.SelectedTab == tabPage_appointmentDetails)
+            {
+                dtGViewAppointmentDetails.DataSource = appointmentDetails.GetAppointmentDetailsList();
+
+
+            }
+            else if (tabControl1.SelectedTab == tabPage_patientSearch)
+            {
+
+            }
         }
     }
 }

@@ -12,13 +12,15 @@ namespace HospitalManagement.DataLayer
         public string Name { get; set; }
         public string LastName { get; set; }
         public string PhoneNum { get; set; }
+        public string Password { get; set; }
 
-        public Secretary(int SecretaryId, string Name, string LastName, string PhoneNum)
+        public Secretary(int SecretaryId, string Name, string LastName, string PhoneNum, string Password)
         {
             this.SecretaryId = SecretaryId;
             this.Name = Name;
             this.LastName = LastName;
             this.PhoneNum = PhoneNum;
+            this.Password = Password;
         }
     }
 }

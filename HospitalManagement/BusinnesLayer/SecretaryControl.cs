@@ -12,16 +12,17 @@ namespace HospitalManagement.BusinnesLayer
 {
     class SecretaryControl
     {
-        public bool AddSecretaryRecord(string name, string lastname, string phoneNum)
+        public bool AddSecretaryRecord(string name, string lastname, string phoneNum, string password)
         {
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
-                    "INSERT INTO Secretary (SName,SLastName,PhoneNumber) " +
-                    "VALUES(@SName,@SLastName,@PhoneNumber)");
+                    "INSERT INTO Secretary (SName,SLastName,PhoneNumber,SPassword) " +
+                    "VALUES(@SName,@SLastName,@PhoneNumber, @SPassword)");
                 sqlCommand.Parameters.AddWithValue("@SName", name);
                 sqlCommand.Parameters.AddWithValue("@SLastName", lastname);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
+                sqlCommand.Parameters.AddWithValue("@SPassword", password);
                 if (sqlCommand.ExecuteNonQuery() > 0)
                     return true;
             }
@@ -33,16 +34,19 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public bool UpdateSecretaryRecord(int id, string name, string lastname, string phoneNum)
+        public bool UpdateSecretaryRecord(int id, string name, string lastname, string phoneNum, string password)
         {
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
-                    "UPDATE Secretary SET SName = @SName,SLastName = @SLastName," +
-                    " PhoneNumber = @PhoneNumber WHERE SecretaryId = @SecretaryId");
+                    "UPDATE Secretary SET SName = @SName,SLastName = @SLastName, " +
+                    "PhoneNumber = @PhoneNumber, "  +
+                    "SPassword = @SPassword " +
+                    "WHERE SecretaryId = @SecretaryId");
                 sqlCommand.Parameters.AddWithValue("@SName", name);
                 sqlCommand.Parameters.AddWithValue("@SLastName", lastname);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
+                sqlCommand.Parameters.AddWithValue("@SPassword", password);
                 sqlCommand.Parameters.AddWithValue("@SecretaryId", id);
                 if (sqlCommand.ExecuteNonQuery() > 0)
                     return true;
@@ -93,7 +97,13 @@ namespace HospitalManagement.BusinnesLayer
         {
             try
             {
-                OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Secretary");
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT " +
+                    "SecretaryId AS [ID], " +
+                    "SName AS [Sekreter Adı], " +
+                    "SLastName AS [Sekreter Soyadı], " +
+                    "PhoneNumber AS [Telefon Numarası], " +
+                    "SPassword AS [Şifre]" +
+                    "FROM Secretary");
                 DataTable table = new DataTable();
                 table.Load(sqlCommand.ExecuteReader());
                 return table;
