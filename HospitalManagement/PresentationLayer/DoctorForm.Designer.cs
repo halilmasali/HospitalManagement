@@ -236,6 +236,7 @@ namespace HospitalManagement.PresentationLayer
             this.dtGViewAppointmentDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtGViewAppointmentDetails.Size = new System.Drawing.Size(891, 150);
             this.dtGViewAppointmentDetails.TabIndex = 0;
+            this.dtGViewAppointmentDetails.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGViewAppointmentDetails_CellDoubleClick);
             // 
             // DoctorForm
             // 
