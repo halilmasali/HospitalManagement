@@ -101,8 +101,13 @@ namespace HospitalManagement
                 if (dtGViewAppointment.Rows[e.RowIndex].Cells[0].Value != null)
                 {
                     appointmentId = Convert.ToInt32(dtGViewAppointment.Rows[e.RowIndex].Cells[0].Value);
+<<<<<<< HEAD
                     //emir değişiklik yaptı.
                     // halil was here
+=======
+                    //emir
+                    // halil was here but not happy.
+>>>>>>> ee6bc3d360e687cbd237c65b34f8db21b330476e
                 }
             }
         }
