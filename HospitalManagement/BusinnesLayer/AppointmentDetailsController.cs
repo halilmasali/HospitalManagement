@@ -80,5 +80,29 @@ namespace HospitalManagement.BusinnesLayer
             }
             return false;
         }
+
+        public PatientRecord GetAppointmentNoteByAppointmentId(int appointmentId)
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand(
+                    "SELECT * FROM PatientRecord " +
+                    "WHERE AppointmentId = @AppointmentId");
+                sqlCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
+                OleDbDataReader dataReader = sqlCommand.ExecuteReader();
+                dataReader.Read();
+                PatientRecord patient = new PatientRecord(
+                    Convert.ToInt32(dataReader[0]),
+                    Convert.ToInt32(dataReader[1]),
+                    dataReader[2].ToString());
+                dataReader.Close();
+                return patient;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return null;
+            }
+        }
     }
 }

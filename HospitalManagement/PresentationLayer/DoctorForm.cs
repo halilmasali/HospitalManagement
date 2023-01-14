@@ -84,6 +84,8 @@ namespace HospitalManagement.PresentationLayer
                         lbl_patientPhone.Text = patient.PhoneNum;
                         lbl_patientEmail.Text = patient.Email;
                         lbl_patientDate.Text = patient.RecordDate.ToShortDateString();
+                        DataLayer.PatientRecord record = appointmentDetails.GetAppointmentNoteByAppointmentId(appointmentId);
+                        txt_patientNote.Text = record.Note;
                     }
                 }
             }
