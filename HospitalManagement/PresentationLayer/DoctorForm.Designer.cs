@@ -50,6 +50,8 @@ namespace HospitalManagement.PresentationLayer
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtGViewAppointmentDetails = new System.Windows.Forms.DataGridView();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage_appointmentDetails.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -127,6 +129,7 @@ namespace HospitalManagement.PresentationLayer
             this.btn_print.TabIndex = 12;
             this.btn_print.Text = "PDF - Yazdır";
             this.btn_print.UseVisualStyleBackColor = true;
+            this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
             // 
             // btn_save
             // 
@@ -266,6 +269,22 @@ namespace HospitalManagement.PresentationLayer
             this.dtGViewAppointmentDetails.TabIndex = 0;
             this.dtGViewAppointmentDetails.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGViewAppointmentDetails_CellDoubleClick);
             // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Text = "Baskı önizleme";
+            this.printPreviewDialog1.Visible = false;
+            // 
             // DoctorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,5 +327,7 @@ namespace HospitalManagement.PresentationLayer
         private System.Windows.Forms.Label lbl_patientName;
         private System.Windows.Forms.Label lbl_patientDate;
         private System.Windows.Forms.Label label5;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }
