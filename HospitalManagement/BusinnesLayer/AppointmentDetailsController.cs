@@ -13,7 +13,6 @@ namespace HospitalManagement.BusinnesLayer
     {
         public DataTable GetAppointmentDetailsList()
         {
-
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
@@ -32,6 +31,54 @@ namespace HospitalManagement.BusinnesLayer
                 System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
                 return null;
             }
+        }
+
+        public Patient GetPatientInfoByAppointmentId(int appointmentId)
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand(
+                    "SELECT * FROM(Patient " +
+                    "INNER JOIN Appointment ON Appointment.PatientId = Patient.PatientId)" +
+                    "WHERE Appointment.AppointmentId = @AppointmentId");
+                sqlCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
+                OleDbDataReader dataReader = sqlCommand.ExecuteReader();
+                dataReader.Read();
+                Patient patient = new Patient(
+                    Convert.ToInt32(dataReader[0]),
+                    dataReader[1].ToString(),
+                    dataReader[2].ToString(),
+                    dataReader[3].ToString(),
+                    dataReader[4].ToString(),
+                    DateTime.Parse(dataReader[5].ToString()));
+                dataReader.Close();
+                return patient;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return null;
+            }
+        }
+
+        public bool AddAppointmentNote(int appointmentId, string note)
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand(
+                    "INSERT INTO PatientRecord (AppointmentId,[Note]) " +
+                    "VALUES(@AppointmentId,@Note)");
+                sqlCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
+                sqlCommand.Parameters.AddWithValue("@Note", note);
+                if (sqlCommand.ExecuteNonQuery() > 0)
+                    return true;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return false;
+            }
+            return false;
         }
     }
 }

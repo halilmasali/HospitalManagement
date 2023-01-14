@@ -17,8 +17,40 @@ namespace HospitalManagement.PresentationLayer
         {
             InitializeComponent();
         }
-        int secretaryId = 0, patientId = 0, appointmentId = 0, doctorId = 0;
+        int appointmentId = 0, doctorId = 0;
         AppointmentDetailsController appointmentDetails;
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            if (txt_patientNote.Text != "")
+            {
+                if (appointmentId > 0)
+                {
+                    if (appointmentDetails.AddAppointmentNote(appointmentId, txt_patientNote.Text))
+                    {
+                        MessageBox.Show("Kayıt Başarılı");
+                        DoctorFormClear();
+                    }
+                }
+                else
+                    MessageBox.Show("Öncelikle randevu seçimi yapmalısınız.", "Uyarı",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+                MessageBox.Show("Boş not kaydedilemez.");
+        }
+
+        private void DoctorFormClear()
+        {
+            appointmentId = 0;
+            txt_patientNote.Text = "";
+            lbl_patientName.Text = "";
+            lbl_patientLastName.Text = "";
+            lbl_patientPhone.Text = "";
+            lbl_patientEmail.Text = "";
+            lbl_patientDate.Text = "";
+        }
+
         private void DoctorForm_Load(object sender, EventArgs e)
         {
             appointmentDetails = new AppointmentDetailsController();
@@ -30,8 +62,6 @@ namespace HospitalManagement.PresentationLayer
             if (tabControl1.SelectedTab == tabPage_appointmentDetails)
             {
                 dtGViewAppointmentDetails.DataSource = appointmentDetails.GetAppointmentDetailsList();
-
-
             }
             else if (tabControl1.SelectedTab == tabPage_patientSearch)
             {
@@ -46,10 +76,15 @@ namespace HospitalManagement.PresentationLayer
                 if (dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[0].Value != null)
                 {
                     appointmentId = Convert.ToInt32(dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[0].Value);
-                    lbl_patientName.Text = dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[1].Value.ToString();
-                    lbl_patientLastName.Text = dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[2].Value.ToString();
-                    lbl_patientPhone.Text = dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[3].Value.ToString();
-                    lbl_patientEmail.Text = dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    if (appointmentId > 0)
+                    {
+                        DataLayer.Patient patient = appointmentDetails.GetPatientInfoByAppointmentId(appointmentId);
+                        lbl_patientName.Text = patient.PName;
+                        lbl_patientLastName.Text = patient.PLastName;
+                        lbl_patientPhone.Text = patient.PhoneNum;
+                        lbl_patientEmail.Text = patient.Email;
+                        lbl_patientDate.Text = patient.RecordDate.ToShortDateString();
+                    }
                 }
             }
         }

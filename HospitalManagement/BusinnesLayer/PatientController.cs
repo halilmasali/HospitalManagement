@@ -24,7 +24,8 @@ namespace HospitalManagement.BusinnesLayer
                     dataReader[1].ToString(),
                     dataReader[2].ToString(), 
                     dataReader[3].ToString(),
-                    dataReader[4].ToString());
+                    dataReader[4].ToString(),
+                    DateTime.Parse(dataReader[5].ToString()));
                 patients.Add(item);
             }
             dataReader.Close();

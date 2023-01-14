@@ -12,14 +12,16 @@ namespace HospitalManagement.DataLayer
         public string PName { get; set; }
         public string PLastName { get; set; }
         public string PhoneNum { get; set; }
-        public string RecordDate { get; set; }
+        public string Email { get; set; }
+        public DateTime RecordDate { get; set; }
 
-        public Patient(int PatientId,string Name, string LastName, string PhoneNum,string RecordDate)
+        public Patient(int PatientId,string Name, string LastName, string PhoneNum,string Email,DateTime RecordDate)
         {
             this.PatientId = PatientId;
             this.PName = Name;
             this.PLastName = LastName;
             this.PhoneNum = PhoneNum;
+            this.Email = Email;
             this.RecordDate = RecordDate;
         }
 

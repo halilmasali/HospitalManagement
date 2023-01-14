@@ -34,11 +34,13 @@ namespace HospitalManagement.PresentationLayer
             this.tabPage_patientSearch = new System.Windows.Forms.TabPage();
             this.tabPage_appointmentDetails = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.txt_patientNote = new System.Windows.Forms.RichTextBox();
             this.btn_sendmail = new System.Windows.Forms.Button();
             this.btn_print = new System.Windows.Forms.Button();
             this.btn_save = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbl_patientDate = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.lbl_patientEmail = new System.Windows.Forms.Label();
             this.lbl_patientPhone = new System.Windows.Forms.Label();
             this.lbl_patientLastName = new System.Windows.Forms.Label();
@@ -92,7 +94,7 @@ namespace HospitalManagement.PresentationLayer
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.richTextBox1);
+            this.groupBox2.Controls.Add(this.txt_patientNote);
             this.groupBox2.Location = new System.Drawing.Point(337, 191);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(381, 302);
@@ -100,13 +102,13 @@ namespace HospitalManagement.PresentationLayer
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Doktor Görüşleri";
             // 
-            // richTextBox1
+            // txt_patientNote
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(6, 19);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(369, 271);
-            this.richTextBox1.TabIndex = 9;
-            this.richTextBox1.Text = "";
+            this.txt_patientNote.Location = new System.Drawing.Point(6, 19);
+            this.txt_patientNote.Name = "txt_patientNote";
+            this.txt_patientNote.Size = new System.Drawing.Size(369, 271);
+            this.txt_patientNote.TabIndex = 9;
+            this.txt_patientNote.Text = "";
             // 
             // btn_sendmail
             // 
@@ -134,9 +136,12 @@ namespace HospitalManagement.PresentationLayer
             this.btn_save.TabIndex = 11;
             this.btn_save.Text = "Kaydet";
             this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbl_patientDate);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lbl_patientEmail);
             this.groupBox1.Controls.Add(this.lbl_patientPhone);
             this.groupBox1.Controls.Add(this.lbl_patientLastName);
@@ -152,75 +157,98 @@ namespace HospitalManagement.PresentationLayer
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Hasta Bilgileri";
             // 
+            // lbl_patientDate
+            // 
+            this.lbl_patientDate.AutoSize = true;
+            this.lbl_patientDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_patientDate.Location = new System.Drawing.Point(125, 276);
+            this.lbl_patientDate.Name = "lbl_patientDate";
+            this.lbl_patientDate.Size = new System.Drawing.Size(0, 15);
+            this.lbl_patientDate.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label5.Location = new System.Drawing.Point(10, 276);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(67, 15);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Kayıt Tarihi";
+            // 
             // lbl_patientEmail
             // 
             this.lbl_patientEmail.AutoSize = true;
-            this.lbl_patientEmail.Location = new System.Drawing.Point(128, 257);
+            this.lbl_patientEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_patientEmail.Location = new System.Drawing.Point(125, 215);
             this.lbl_patientEmail.Name = "lbl_patientEmail";
-            this.lbl_patientEmail.Size = new System.Drawing.Size(10, 13);
+            this.lbl_patientEmail.Size = new System.Drawing.Size(0, 15);
             this.lbl_patientEmail.TabIndex = 8;
-            this.lbl_patientEmail.Text = " ";
             // 
             // lbl_patientPhone
             // 
             this.lbl_patientPhone.AutoSize = true;
-            this.lbl_patientPhone.Location = new System.Drawing.Point(128, 182);
+            this.lbl_patientPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_patientPhone.Location = new System.Drawing.Point(125, 154);
             this.lbl_patientPhone.Name = "lbl_patientPhone";
-            this.lbl_patientPhone.Size = new System.Drawing.Size(10, 13);
+            this.lbl_patientPhone.Size = new System.Drawing.Size(0, 15);
             this.lbl_patientPhone.TabIndex = 7;
-            this.lbl_patientPhone.Text = " ";
             // 
             // lbl_patientLastName
             // 
             this.lbl_patientLastName.AutoSize = true;
-            this.lbl_patientLastName.Location = new System.Drawing.Point(128, 107);
+            this.lbl_patientLastName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_patientLastName.Location = new System.Drawing.Point(125, 93);
             this.lbl_patientLastName.Name = "lbl_patientLastName";
-            this.lbl_patientLastName.Size = new System.Drawing.Size(10, 13);
+            this.lbl_patientLastName.Size = new System.Drawing.Size(0, 15);
             this.lbl_patientLastName.TabIndex = 6;
-            this.lbl_patientLastName.Text = " ";
             // 
             // lbl_patientName
             // 
             this.lbl_patientName.AutoSize = true;
-            this.lbl_patientName.Location = new System.Drawing.Point(128, 32);
+            this.lbl_patientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lbl_patientName.Location = new System.Drawing.Point(125, 32);
             this.lbl_patientName.Name = "lbl_patientName";
-            this.lbl_patientName.Size = new System.Drawing.Size(10, 13);
+            this.lbl_patientName.Size = new System.Drawing.Size(0, 15);
             this.lbl_patientName.TabIndex = 5;
-            this.lbl_patientName.Text = " ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 257);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(10, 215);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 13);
+            this.label4.Size = new System.Drawing.Size(86, 15);
             this.label4.TabIndex = 4;
             this.label4.Text = "E-posta Adresi";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 182);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label3.Location = new System.Drawing.Point(10, 154);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 13);
+            this.label3.Size = new System.Drawing.Size(105, 15);
             this.label3.TabIndex = 3;
             this.label3.Text = "Telefon Numarası";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label1.Location = new System.Drawing.Point(10, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "Hasta Adı";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 107);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label2.Location = new System.Drawing.Point(10, 93);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.Size = new System.Drawing.Size(79, 15);
             this.label2.TabIndex = 2;
             this.label2.Text = "Hasta Soyadı";
             // 
@@ -268,7 +296,7 @@ namespace HospitalManagement.PresentationLayer
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox txt_patientNote;
         private System.Windows.Forms.Button btn_sendmail;
         private System.Windows.Forms.Button btn_print;
         private System.Windows.Forms.Button btn_save;
@@ -278,5 +306,7 @@ namespace HospitalManagement.PresentationLayer
         private System.Windows.Forms.Label lbl_patientPhone;
         private System.Windows.Forms.Label lbl_patientLastName;
         private System.Windows.Forms.Label lbl_patientName;
+        private System.Windows.Forms.Label lbl_patientDate;
+        private System.Windows.Forms.Label label5;
     }
 }
