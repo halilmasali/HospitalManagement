@@ -19,6 +19,7 @@ namespace HospitalManagement.PresentationLayer
         }
         int secretaryId = 0, patientId = 0, appointmentId = 0, doctorId = 0;
         AppointmentDetailsController appointmentDetails;
+
         private void DoctorForm_Load(object sender, EventArgs e)
         {
             appointmentDetails = new AppointmentDetailsController();
@@ -51,6 +52,32 @@ namespace HospitalManagement.PresentationLayer
                     lbl_patientPhone.Text = dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[3].Value.ToString();
                     lbl_patientEmail.Text = dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[4].Value.ToString();
                 }
+            }
+        }
+
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.ShowDialog();
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            try
+            {
+                Font font = new Font("Arial", 10);
+                SolidBrush firca = new SolidBrush(Color.Black);
+                e.Graphics.DrawString($"Tarih: {DateTime.Now.ToString("dd.MM.yyyy")}", font, firca, 60, 25);
+                font = new Font("Arial", 18, FontStyle.Bold);
+                e.Graphics.DrawString("Hasta Bilgisi", font, firca, 350, 70);
+                font = new Font("Arial", 14, FontStyle.Bold);
+                e.Graphics.DrawString("Hasta Adı Soyadı", font, firca, 60, 130);
+                e.Graphics.DrawString("Randevu Tarihi", font, firca, 280, 130);
+
+            }
+            catch (Exception)
+            {
+
+                
             }
         }
     }
