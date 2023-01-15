@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.DataLayer
 {
-    class Doctor
+    class Doctor //Doktor tablosu prop'ları.
     {
         public int DoctorId { get; }
         public string DName { get; set; }
@@ -16,7 +16,7 @@ namespace HospitalManagement.DataLayer
         public string DPassword { get; set; }
 
 
-        public Doctor(int DoctorId, string DName, string DLastName, int BranchId, string PhoneNum, string DPassword)
+        public Doctor(int DoctorId, string DName, string DLastName, int BranchId, string PhoneNum, string DPassword) //Doktor classı constructor'ı.
         {
             this.DoctorId = DoctorId;
             this.DName = DName;
@@ -26,7 +26,7 @@ namespace HospitalManagement.DataLayer
             this.DPassword = DPassword;
         }
 
-        public override string ToString()
+        public override string ToString() //override edilmiş toString() methodu.
         {
             return DName + " " + DLastName;
         }

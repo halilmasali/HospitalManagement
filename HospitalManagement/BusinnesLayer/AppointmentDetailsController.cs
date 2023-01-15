@@ -11,7 +11,7 @@ namespace HospitalManagement.BusinnesLayer
 {
     class AppointmentDetailsController
     {
-        public DataTable GetAppointmentDetailsList()
+        public DataTable GetAppointmentDetailsList() //Randevu Detay tablosunu geriye döndürür
         {
             try
             {
@@ -33,7 +33,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-        public Patient GetPatientInfoByAppointmentId(int appointmentId)
+        public Patient GetPatientInfoByAppointmentId(int appointmentId) //randevu ID'sine göre hasta tipinde veri geriye döndürür.
         {
             try
             {
@@ -61,7 +61,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-        public bool AddAppointmentNote(int appointmentId, string note)
+        public bool AddAppointmentNote(int appointmentId, string note) //yeni randevu ekleme methodu
         {
             try
             {
@@ -81,7 +81,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public PatientRecord GetAppointmentNoteByAppointmentId(int appointmentId)
+        public PatientRecord GetAppointmentNoteByAppointmentId(int appointmentId) //randevu notlarını, randevu ID'sine göre geriye döndürür.
         {
             try
             {

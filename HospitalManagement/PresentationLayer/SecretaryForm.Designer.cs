@@ -35,6 +35,8 @@ namespace HospitalManagement
             this.txt_secreter_search = new System.Windows.Forms.TextBox();
             this.dtGViewSecreter = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txt_secreter_password = new System.Windows.Forms.TextBox();
             this.btn_secreter_delete = new System.Windows.Forms.Button();
             this.btn_secreter_update = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
@@ -49,6 +51,8 @@ namespace HospitalManagement
             this.txt_doctor_search = new System.Windows.Forms.TextBox();
             this.dtGViewDoctor = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_doctor_password = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.cmb_doctor_branch = new System.Windows.Forms.ComboBox();
             this.btn_doctor_delete = new System.Windows.Forms.Button();
             this.btn_doctor_update = new System.Windows.Forms.Button();
@@ -94,10 +98,6 @@ namespace HospitalManagement
             this.cmb_clock = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txt_doctor_password = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txt_secreter_password = new System.Windows.Forms.TextBox();
             this.tabPage_Secreter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGViewSecreter)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -177,6 +177,22 @@ namespace HospitalManagement
             this.groupBox4.TabIndex = 22;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Sekreter Kayıt Yönetim";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(26, 216);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(28, 13);
+            this.label22.TabIndex = 25;
+            this.label22.Text = "Şifre";
+            // 
+            // txt_secreter_password
+            // 
+            this.txt_secreter_password.Location = new System.Drawing.Point(122, 213);
+            this.txt_secreter_password.Name = "txt_secreter_password";
+            this.txt_secreter_password.Size = new System.Drawing.Size(187, 20);
+            this.txt_secreter_password.TabIndex = 26;
             // 
             // btn_secreter_delete
             // 
@@ -323,6 +339,22 @@ namespace HospitalManagement
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Doktor Kayıt Yönetim";
+            // 
+            // txt_doctor_password
+            // 
+            this.txt_doctor_password.Location = new System.Drawing.Point(122, 250);
+            this.txt_doctor_password.Name = "txt_doctor_password";
+            this.txt_doctor_password.Size = new System.Drawing.Size(187, 20);
+            this.txt_doctor_password.TabIndex = 9;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(26, 253);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(28, 13);
+            this.label20.TabIndex = 8;
+            this.label20.Text = "Şifre";
             // 
             // cmb_doctor_branch
             // 
@@ -792,38 +824,6 @@ namespace HospitalManagement
             this.tabControl1.TabIndex = 0;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(26, 253);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(28, 13);
-            this.label20.TabIndex = 8;
-            this.label20.Text = "Şifre";
-            // 
-            // txt_doctor_password
-            // 
-            this.txt_doctor_password.Location = new System.Drawing.Point(122, 250);
-            this.txt_doctor_password.Name = "txt_doctor_password";
-            this.txt_doctor_password.Size = new System.Drawing.Size(187, 20);
-            this.txt_doctor_password.TabIndex = 9;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(26, 216);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(28, 13);
-            this.label22.TabIndex = 25;
-            this.label22.Text = "Şifre";
-            // 
-            // txt_secreter_password
-            // 
-            this.txt_secreter_password.Location = new System.Drawing.Point(122, 213);
-            this.txt_secreter_password.Name = "txt_secreter_password";
-            this.txt_secreter_password.Size = new System.Drawing.Size(187, 20);
-            this.txt_secreter_password.TabIndex = 26;
-            // 
             // SecretaryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -832,6 +832,7 @@ namespace HospitalManagement
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SecretaryForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sekreter Ekranı";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabPage_Secreter.ResumeLayout(false);

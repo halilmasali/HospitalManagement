@@ -10,7 +10,7 @@ namespace HospitalManagement.DataLayer
 {
     class Database
     {
-        public static OleDbConnection OpenConnection
+        public static OleDbConnection OpenConnection //Veritabanı bağlantısı kuruluyor.
         {
             get
             {
@@ -26,7 +26,7 @@ namespace HospitalManagement.DataLayer
             }
         }
 
-        public static OleDbCommand SqlCommand(string c)
+        public static OleDbCommand SqlCommand(string c) //SQL sorgusu geriye dönen method.
         {
             OleDbCommand command = new OleDbCommand(c, OpenConnection);
             return command;

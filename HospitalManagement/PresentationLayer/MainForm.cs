@@ -16,8 +16,8 @@ namespace HospitalManagement.PresentationLayer
         {
             InitializeComponent();
         }
-        BusinnesLayer.SecretaryControl secretary = new BusinnesLayer.SecretaryControl();
-        BusinnesLayer.DoctorControl doctor = new BusinnesLayer.DoctorControl();
+        BusinnesLayer.SecretaryControl secretary = new BusinnesLayer.SecretaryControl(); //Sekreter için controller oluşturuluyor.
+        BusinnesLayer.DoctorControl doctor = new BusinnesLayer.DoctorControl(); //Doktor için controller oluşturuluyor.
         private short auth_type = 0;
         //Sekreter ve Doktor girişini ayırt etmek için değişken tanımı
         //auth_type 0 --> Tanımsız
@@ -35,7 +35,7 @@ namespace HospitalManagement.PresentationLayer
             auth_type = 2;            
         }
 
-        private void btn_auth_Click(object sender, EventArgs e)
+        private void btn_auth_Click(object sender, EventArgs e) //Authentication işlemi için kontroller sağlanıyor.
         {
             if (txt_phoneNum.Text != "" && txt_password.Text != "")
             {
@@ -65,6 +65,10 @@ namespace HospitalManagement.PresentationLayer
                     else
                         MessageBox.Show("Kullanıcı Adı veya Şifre Hatalı.");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen Kullanıcı Adı ve Şifre Giriniz.");
             }
         }
 

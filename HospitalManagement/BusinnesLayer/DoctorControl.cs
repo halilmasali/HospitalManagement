@@ -11,7 +11,7 @@ namespace HospitalManagement.BusinnesLayer
 {
     class DoctorControl
     {
-        public static List<Doctor> getDoctors()
+        public static List<Doctor> getDoctors() //Doktor listesini geriye döndürür.
         {
             OleDbCommand sqlCommand = Database.SqlCommand("select * from Doctor");
             OleDbDataReader dataReader = sqlCommand.ExecuteReader();
@@ -32,7 +32,7 @@ namespace HospitalManagement.BusinnesLayer
             return doctors;
         }
 
-        public List<Doctor> getDoctorsByBranch(int branchId)
+        public List<Doctor> getDoctorsByBranch(int branchId) //Branş ID'ye göre doktor listesini geriye döndürür.
         {
             List<Doctor> list = new List<Doctor>();
             List<Doctor> doctors = DoctorControl.getDoctors();
@@ -46,7 +46,7 @@ namespace HospitalManagement.BusinnesLayer
             return list;
         }
 
-        public bool AddDoctorRecord(string name, string lastname, int branchId, string phoneNum, string password)
+        public bool AddDoctorRecord(string name, string lastname, int branchId, string phoneNum, string password) //Yeni doktor kaydı ekler.
         {
             try
             {
@@ -69,7 +69,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public bool UpdateDoctorRecord(int id, string name, string lastname, int branchId, string phoneNum, string password)
+        public bool UpdateDoctorRecord(int id, string name, string lastname, int branchId, string phoneNum, string password) //Doktor kaydını günceller.
         {
             try
             {
@@ -93,7 +93,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public bool DeleteDoctorRecord(int id)
+        public bool DeleteDoctorRecord(int id) //Doktor kaydını siler.
         {
             try
             {
@@ -110,7 +110,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public DataTable SearchDoctorRecord(string searchValue)
+        public DataTable SearchDoctorRecord(string searchValue) //Arama sorgusu sonucu oluşan değerleri datatable olarak return eder.
         {
             try
             {
@@ -134,7 +134,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-        public DataTable GetDoktorsList()
+        public DataTable GetDoktorsList() //Doktor verisini datatable olarak geriye döndürür.
         {
             try
             {
@@ -158,7 +158,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-        public bool DoctorAuth(string phone, string password)
+        public bool DoctorAuth(string phone, string password) //Doktor girşi için authentication yapar.
         {
             try
             {
