@@ -77,8 +77,8 @@ namespace HospitalManagement.BusinnesLayer
                 OleDbCommand sqlCommand = Database.SqlCommand(
                     "UPDATE Doctor SET DName = @DName,DLastName = @DLastName," +
                     " PhoneNumber = @PhoneNumber, BranchId = @BranchId, DPassword = @DPassword WHERE DoctorId = @DoctorId");
-                sqlCommand.Parameters.AddWithValue("@PName", name);
-                sqlCommand.Parameters.AddWithValue("@PLastName", lastname);
+                sqlCommand.Parameters.AddWithValue("@DName", name);
+                sqlCommand.Parameters.AddWithValue("@DLastName", lastname);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", phoneNum);
                 sqlCommand.Parameters.AddWithValue("@BranchId", branchId);
                 sqlCommand.Parameters.AddWithValue("@DPassword", password);
