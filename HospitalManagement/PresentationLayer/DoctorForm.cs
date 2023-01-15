@@ -62,20 +62,8 @@ namespace HospitalManagement.PresentationLayer
             doctorSession = doctor.GetDoctorSession();//oturum açan doktor bilgisi alındı.
             this.Text += " - " + doctorSession.DName + " " +
                 doctorSession.DLastName;//doktor ismi form başlığına yazıldı.
-            tabControl1.SelectedTab = tabPage_appointmentDetails;
-        }
-
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            if (tabControl1.SelectedTab == tabPage_appointmentDetails)
-            {
-                //Controller aracılığıyla RAndevuDetay tablsou DGW'a yazdırılıyor.
-                dtGViewAppointmentDetails.DataSource = appointmentDetails.GetAppointmentListbyDoctor(doctorSession.DoctorId);
-            }
-            else if (tabControl1.SelectedTab == tabPage_patientSearch)
-            {
-
-            }
+                                        //Controller aracılığıyla RandevuDetay tablsou DGW'a yazdırılıyor.
+            dtGViewAppointmentDetails.DataSource = appointmentDetails.GetAppointmentListbyDoctor(doctorSession.DoctorId);
         }
 
         private void dtGViewAppointmentDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e) //DGW'da veriye çift tıklayınca label'lara bilgiler yazılıyor.
@@ -186,7 +174,34 @@ namespace HospitalManagement.PresentationLayer
             }
             catch (Exception exception)
             {
-                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                MessageBox.Show("Hata :" + exception.Message);
+            }
+        }
+
+        private void btn_sendmail_Click(object sender, EventArgs e)
+        {
+            if (lbl_patientName.Text != "" && lbl_patientLastName.Text != "" && lbl_patientPhone.Text != "" &&
+                    lbl_patientDate.Text != "" && txt_patientNote.Text != "")
+            {
+                DialogResult dialog = MessageBox.Show("Hasta görüşlerini göndermek istiyor musunuz?",
+                    "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialog == DialogResult.Yes)
+                {
+                    MailSender.SendMail(
+                        lbl_patientEmail.Text,
+                        lbl_patientName.Text + " " + lbl_patientLastName.Text + "Randevu Sonucu",
+                        txt_patientNote.Text,
+                        null);
+                }
+                else
+                    MessageBox.Show("Gönderme işlemi iptal edildi.", "Bilgi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Lütfen bir randevu kaydı seçiniz." +
+                    "(Seçim işlemini randevu bilgisine çift tıklayarak yapabilirsiniz.)", "Uyarı",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

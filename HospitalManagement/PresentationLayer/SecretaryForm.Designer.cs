@@ -29,12 +29,12 @@ namespace HospitalManagement
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecretaryForm));
             this.tabPage_Secreter = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
@@ -105,8 +105,8 @@ namespace HospitalManagement
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_statistic = new System.Windows.Forms.TabPage();
-            this.chart_branch = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart_doctor = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart_branch = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage_Secreter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGViewSecreter)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -121,8 +121,8 @@ namespace HospitalManagement
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_statistic.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart_branch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_doctor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_branch)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage_Secreter
@@ -848,23 +848,6 @@ namespace HospitalManagement
             this.tabPage_statistic.Text = "İstatistikler";
             this.tabPage_statistic.UseVisualStyleBackColor = true;
             // 
-            // chart_branch
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.chart_branch.ChartAreas.Add(chartArea2);
-            this.chart_branch.Location = new System.Drawing.Point(8, 13);
-            this.chart_branch.Name = "chart_branch";
-            series2.ChartArea = "ChartArea1";
-            series2.Name = "Bölüm";
-            this.chart_branch.Series.Add(series2);
-            this.chart_branch.Size = new System.Drawing.Size(560, 510);
-            this.chart_branch.TabIndex = 0;
-            this.chart_branch.Text = "chart1";
-            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            title2.Name = "Title1";
-            title2.Text = "Bölüme Göre Hasta Sayısı";
-            this.chart_branch.Titles.Add(title2);
-            // 
             // chart_doctor
             // 
             chartArea1.Name = "ChartArea1";
@@ -882,6 +865,23 @@ namespace HospitalManagement
             title1.Text = "Doktora Göre Hasta Sayısı";
             this.chart_doctor.Titles.Add(title1);
             // 
+            // chart_branch
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart_branch.ChartAreas.Add(chartArea2);
+            this.chart_branch.Location = new System.Drawing.Point(8, 13);
+            this.chart_branch.Name = "chart_branch";
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Bölüm";
+            this.chart_branch.Series.Add(series2);
+            this.chart_branch.Size = new System.Drawing.Size(560, 510);
+            this.chart_branch.TabIndex = 0;
+            this.chart_branch.Text = "chart1";
+            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            title2.Name = "Title1";
+            title2.Text = "Bölüme Göre Hasta Sayısı";
+            this.chart_branch.Titles.Add(title2);
+            // 
             // SecretaryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -889,6 +889,9 @@ namespace HospitalManagement
             this.ClientSize = new System.Drawing.Size(1184, 561);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1200, 600);
+            this.MinimumSize = new System.Drawing.Size(1200, 600);
             this.Name = "SecretaryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sekreter Ekranı";
@@ -915,8 +918,8 @@ namespace HospitalManagement
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage_statistic.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart_branch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_doctor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_branch)).EndInit();
             this.ResumeLayout(false);
 
         }

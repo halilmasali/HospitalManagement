@@ -87,6 +87,7 @@
     <Compile Include="BusinnesLayer\AppointmentDetailsController.cs" />
     <Compile Include="BusinnesLayer\BranchControl.cs" />
     <Compile Include="BusinnesLayer\DoctorControl.cs" />
+    <Compile Include="BusinnesLayer\MailSender.cs" />
     <Compile Include="BusinnesLayer\PatientController.cs" />
     <Compile Include="BusinnesLayer\SecretaryControl.cs" />
     <Compile Include="DataLayer\Appointment.cs" />

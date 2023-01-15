@@ -30,9 +30,8 @@ namespace HospitalManagement.PresentationLayer
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DoctorForm));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage_patientSearch = new System.Windows.Forms.TabPage();
-            this.tabPage_appointmentDetails = new System.Windows.Forms.TabPage();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txt_patientNote = new System.Windows.Forms.RichTextBox();
             this.btn_sendmail = new System.Windows.Forms.Button();
@@ -50,57 +49,34 @@ namespace HospitalManagement.PresentationLayer
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dtGViewAppointmentDetails = new System.Windows.Forms.DataGridView();
-            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.tabControl1.SuspendLayout();
-            this.tabPage_appointmentDetails.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGViewAppointmentDetails)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // printDocument1
             // 
-            this.tabControl1.Controls.Add(this.tabPage_patientSearch);
-            this.tabControl1.Controls.Add(this.tabPage_appointmentDetails);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(915, 542);
-            this.tabControl1.TabIndex = 0;
-            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
-            // tabPage_patientSearch
+            // printPreviewDialog1
             // 
-            this.tabPage_patientSearch.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_patientSearch.Name = "tabPage_patientSearch";
-            this.tabPage_patientSearch.Size = new System.Drawing.Size(907, 516);
-            this.tabPage_patientSearch.TabIndex = 0;
-            this.tabPage_patientSearch.Text = "Hasta Ara";
-            this.tabPage_patientSearch.UseVisualStyleBackColor = true;
-            // 
-            // tabPage_appointmentDetails
-            // 
-            this.tabPage_appointmentDetails.Controls.Add(this.groupBox2);
-            this.tabPage_appointmentDetails.Controls.Add(this.btn_sendmail);
-            this.tabPage_appointmentDetails.Controls.Add(this.btn_print);
-            this.tabPage_appointmentDetails.Controls.Add(this.btn_save);
-            this.tabPage_appointmentDetails.Controls.Add(this.groupBox1);
-            this.tabPage_appointmentDetails.Controls.Add(this.dtGViewAppointmentDetails);
-            this.tabPage_appointmentDetails.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_appointmentDetails.Name = "tabPage_appointmentDetails";
-            this.tabPage_appointmentDetails.Size = new System.Drawing.Size(907, 516);
-            this.tabPage_appointmentDetails.TabIndex = 0;
-            this.tabPage_appointmentDetails.Text = "Randevu Detay";
-            this.tabPage_appointmentDetails.UseVisualStyleBackColor = true;
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Text = "Baskı önizleme";
+            this.printPreviewDialog1.Visible = false;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.txt_patientNote);
-            this.groupBox2.Location = new System.Drawing.Point(337, 191);
+            this.groupBox2.Location = new System.Drawing.Point(341, 216);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(381, 302);
-            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Doktor Görüşleri";
             // 
@@ -114,29 +90,30 @@ namespace HospitalManagement.PresentationLayer
             // 
             // btn_sendmail
             // 
-            this.btn_sendmail.Location = new System.Drawing.Point(748, 363);
+            this.btn_sendmail.Location = new System.Drawing.Point(750, 401);
             this.btn_sendmail.Name = "btn_sendmail";
             this.btn_sendmail.Size = new System.Drawing.Size(126, 37);
-            this.btn_sendmail.TabIndex = 13;
+            this.btn_sendmail.TabIndex = 19;
             this.btn_sendmail.Text = "E-mail Gönder";
             this.btn_sendmail.UseVisualStyleBackColor = true;
+            this.btn_sendmail.Click += new System.EventHandler(this.btn_sendmail_Click);
             // 
             // btn_print
             // 
-            this.btn_print.Location = new System.Drawing.Point(748, 310);
+            this.btn_print.Location = new System.Drawing.Point(750, 348);
             this.btn_print.Name = "btn_print";
             this.btn_print.Size = new System.Drawing.Size(126, 37);
-            this.btn_print.TabIndex = 12;
+            this.btn_print.TabIndex = 18;
             this.btn_print.Text = "PDF - Yazdır";
             this.btn_print.UseVisualStyleBackColor = true;
             this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(748, 257);
+            this.btn_save.Location = new System.Drawing.Point(750, 295);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(126, 37);
-            this.btn_save.TabIndex = 11;
+            this.btn_save.TabIndex = 17;
             this.btn_save.Text = "Kaydet";
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -153,10 +130,10 @@ namespace HospitalManagement.PresentationLayer
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(8, 191);
+            this.groupBox1.Location = new System.Drawing.Point(22, 216);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(303, 302);
-            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Hasta Bilgileri";
             // 
@@ -261,43 +238,33 @@ namespace HospitalManagement.PresentationLayer
             this.dtGViewAppointmentDetails.AllowUserToDeleteRows = false;
             this.dtGViewAppointmentDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtGViewAppointmentDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtGViewAppointmentDetails.Location = new System.Drawing.Point(8, 17);
+            this.dtGViewAppointmentDetails.Location = new System.Drawing.Point(22, 19);
             this.dtGViewAppointmentDetails.Name = "dtGViewAppointmentDetails";
             this.dtGViewAppointmentDetails.ReadOnly = true;
             this.dtGViewAppointmentDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtGViewAppointmentDetails.Size = new System.Drawing.Size(891, 150);
-            this.dtGViewAppointmentDetails.TabIndex = 0;
+            this.dtGViewAppointmentDetails.Size = new System.Drawing.Size(872, 182);
+            this.dtGViewAppointmentDetails.TabIndex = 15;
             this.dtGViewAppointmentDetails.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtGViewAppointmentDetails_CellDoubleClick);
-            // 
-            // printDocument1
-            // 
-            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
-            // 
-            // printPreviewDialog1
-            // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog1.Document = this.printDocument1;
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Text = "Baskı önizleme";
-            this.printPreviewDialog1.Visible = false;
             // 
             // DoctorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 542);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.btn_sendmail);
+            this.Controls.Add(this.btn_print);
+            this.Controls.Add(this.btn_save);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.dtGViewAppointmentDetails);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(931, 581);
+            this.MinimumSize = new System.Drawing.Size(931, 581);
             this.Name = "DoctorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Doktor Ekranı";
             this.Load += new System.EventHandler(this.DoctorForm_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage_appointmentDetails.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -307,28 +274,24 @@ namespace HospitalManagement.PresentationLayer
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage_patientSearch;
-        private System.Windows.Forms.TabPage tabPage_appointmentDetails;
-        private System.Windows.Forms.DataGridView dtGViewAppointmentDetails;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox txt_patientNote;
         private System.Windows.Forms.Button btn_sendmail;
         private System.Windows.Forms.Button btn_print;
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lbl_patientDate;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbl_patientEmail;
         private System.Windows.Forms.Label lbl_patientPhone;
         private System.Windows.Forms.Label lbl_patientLastName;
         private System.Windows.Forms.Label lbl_patientName;
-        private System.Windows.Forms.Label lbl_patientDate;
-        private System.Windows.Forms.Label label5;
-        private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dtGViewAppointmentDetails;
     }
 }
