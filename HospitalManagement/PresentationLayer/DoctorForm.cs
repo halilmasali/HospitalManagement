@@ -103,7 +103,7 @@ namespace HospitalManagement.PresentationLayer
         private void btn_print_Click(object sender, EventArgs e) //Yazdırma işlemi
         {
             if (lbl_patientName.Text != "" && lbl_patientLastName.Text != "" && lbl_patientPhone.Text != "" &&
-                    lbl_patientDate.Text != "" && txt_patientNote.Text != "")
+                    lbl_patientDate.Text != "")
             {
                 printPreviewDialog1.ShowDialog();
             }
@@ -167,7 +167,7 @@ namespace HospitalManagement.PresentationLayer
                 e.Graphics.DrawString(lbl_patientName.Text + " " + lbl_patientLastName.Text, font, firca, x, y);
                 e.Graphics.DrawString(lbl_patientEmail.Text, font, firca, x, y + 30);
                 e.Graphics.DrawString(lbl_patientPhone.Text, font, firca, x, y + 60);
-                e.Graphics.DrawString(lbl_patientDate.Text, font, firca, x, y + 90);
+                e.Graphics.DrawString(dtGViewAppointmentDetails.Rows[0].Cells[2].Value.ToString(), font, firca, x, y + 90);
 
                 e.Graphics.DrawLine(kalem, 50, 420, 780, 420);
                 e.Graphics.DrawLine(kalem, 50, 900, 780, 900);
@@ -183,6 +183,12 @@ namespace HospitalManagement.PresentationLayer
                 string output = AddLineBreaks(input, maxLength);
                 font = new Font("Arial", 14);
                 e.Graphics.DrawString(output, font, firca, 60, y);
+
+                font = new Font("Arial", 14, FontStyle.Bold);
+                e.Graphics.DrawString("Doktor Ad Soyad", font, firca, 600, 950);
+                e.Graphics.DrawString("İmza", font, firca, 660, 975);
+                font = new Font("Arial", 14);
+                e.Graphics.DrawString("Dr. " + doctorSession.DName + " " + doctorSession.DLastName, font, firca, 600, 1010);
             }
             catch (Exception exception)
             {

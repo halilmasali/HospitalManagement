@@ -63,17 +63,37 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-        public bool AddAppointmentNote(int appointmentId, string note) //yeni randevu ekleme methodu
+        public bool AddAppointmentNote(int appointmentId, string note) //yeni randevu notu ekleme methodu
         {
             try
             {
-                OleDbCommand sqlCommand = Database.SqlCommand(
-                    "INSERT INTO PatientRecord (AppointmentId,[Note]) " +
-                    "VALUES(@AppointmentId,@Note)");
+                //OleDbCommand sqlCommand = Database.SqlCommand(
+                //    "INSERT INTO PatientRecord (AppointmentId,[Note]) " +
+                //    "VALUES(@AppointmentId,@Note)");
+                //OleDbCommand sqlCommand = Database.SqlCommand(
+                //    "UPDATE PatientRecord SET [Note] = @Note WHERE AppointmentId = @AppointmentId");
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM PatientRecord WHERE AppointmentId = @AppointmentId");
                 sqlCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
-                sqlCommand.Parameters.AddWithValue("@Note", note);
-                if (sqlCommand.ExecuteNonQuery() > 0)
-                    return true;
+                OleDbDataReader dataReader = sqlCommand.ExecuteReader();
+                if (dataReader.HasRows)
+                {
+                    OleDbCommand sqlCommand3 = Database.SqlCommand(
+                        "UPDATE PatientRecord SET [Note] = @Note WHERE AppointmentId = @AppointmentId");
+                    sqlCommand3.Parameters.AddWithValue("@Note", note);
+                    sqlCommand3.Parameters.AddWithValue("@AppointmentId", appointmentId);
+                    if (sqlCommand3.ExecuteNonQuery() > 0)
+                        return true;
+                }
+                else
+                {
+                    OleDbCommand sqlCommand2 = Database.SqlCommand(
+                        "INSERT INTO PatientRecord (AppointmentId, [Note]) " +
+                        "VALUES (@AppointmentId, @Note)");
+                    sqlCommand2.Parameters.AddWithValue("@AppointmentId", appointmentId);
+                    sqlCommand2.Parameters.AddWithValue("@Note", note);
+                    if (sqlCommand2.ExecuteNonQuery() > 0)
+                        return true;
+                }
             }
             catch (OleDbException exception)
             {
