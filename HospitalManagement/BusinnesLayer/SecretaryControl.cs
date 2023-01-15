@@ -12,6 +12,7 @@ namespace HospitalManagement.BusinnesLayer
 {
     class SecretaryControl
     {
+        private static int AuthCredential = 0;
         public bool AddSecretaryRecord(string name, string lastname, string phoneNum, string password) //Yeni sekreter kaydı ekler.
         {
             try
@@ -126,12 +127,13 @@ namespace HospitalManagement.BusinnesLayer
         {
             try
             {
-                OleDbCommand sqlCommand = Database.SqlCommand("SELECT PhoneNumber,SPassword FROM Secretary");
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT PhoneNumber,SPassword,SecretaryId FROM Secretary");
                 OleDbDataReader dataReader = sqlCommand.ExecuteReader();
                 while (dataReader.Read())
                 {
                     if (dataReader[0].ToString() == phone && dataReader[1].ToString() == password)
                     {
+                        AuthCredential = Convert.ToInt32(dataReader[2]);
                         return true;
                     }
                 }
@@ -176,6 +178,32 @@ namespace HospitalManagement.BusinnesLayer
                 DataTable table = new DataTable();
                 table.Load(sqlCommand.ExecuteReader());
                 return table;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return null;
+            }
+        }
+        //Açılan sekreter oturumunun bilgisini geriye göndürür.
+        public Secretary GetSecretarySession()
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand(
+                    "SELECT * FROM Secretary " +
+                    "WHERE SecretaryId = @SecretaryId");
+                sqlCommand.Parameters.AddWithValue("@SecretaryId", AuthCredential);
+                OleDbDataReader dataReader = sqlCommand.ExecuteReader();
+                dataReader.Read();
+                Secretary secretary = new Secretary(
+                    Convert.ToInt32(dataReader[0]),
+                    dataReader[1].ToString(),
+                    dataReader[2].ToString(),
+                    dataReader[3].ToString(),
+                    dataReader[4].ToString());
+                dataReader.Close();
+                return secretary;
             }
             catch (OleDbException exception)
             {

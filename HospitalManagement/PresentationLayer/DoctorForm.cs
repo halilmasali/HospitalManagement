@@ -1,4 +1,5 @@
 ﻿using HospitalManagement.BusinnesLayer; //BusinessLayer'a ulaşmak için gerekli. 
+using HospitalManagement.DataLayer;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,8 +19,10 @@ namespace HospitalManagement.PresentationLayer
         {
             InitializeComponent();
         }
-        int appointmentId = 0, doctorId = 0;
+        int appointmentId = 0;
         AppointmentDetailsController appointmentDetails; //RandevuDetay için controller referansı oluşturuluyor.
+        DoctorControl doctor;
+        Doctor doctorSession;
 
         private void btn_save_Click(object sender, EventArgs e) //RandevuDetaylarını kaydeder.
         {
@@ -55,6 +58,10 @@ namespace HospitalManagement.PresentationLayer
         private void DoctorForm_Load(object sender, EventArgs e)
         {
             appointmentDetails = new AppointmentDetailsController(); //RandevuDetay için controller oluşturuluyor.
+            doctor = new DoctorControl(); //Doctor için controller oluşturuluyor.            
+            doctorSession = doctor.GetDoctorSession();//oturum açan doktor bilgisi alındı.
+            this.Text += " - " + doctorSession.DName + " " +
+                doctorSession.DLastName;//doktor ismi form başlığına yazıldı.
             tabControl1.SelectedTab = tabPage_appointmentDetails;
         }
 
@@ -62,7 +69,8 @@ namespace HospitalManagement.PresentationLayer
         {
             if (tabControl1.SelectedTab == tabPage_appointmentDetails)
             {
-                dtGViewAppointmentDetails.DataSource = appointmentDetails.GetAppointmentDetailsList(); //Controller aracılığıyla RAndevuDetay tablsou DGW'a yazdırılıyor.
+                //Controller aracılığıyla RAndevuDetay tablsou DGW'a yazdırılıyor.
+                dtGViewAppointmentDetails.DataSource = appointmentDetails.GetAppointmentListbyDoctor(doctorSession.DoctorId);
             }
             else if (tabControl1.SelectedTab == tabPage_patientSearch)
             {
@@ -79,13 +87,13 @@ namespace HospitalManagement.PresentationLayer
                     appointmentId = Convert.ToInt32(dtGViewAppointmentDetails.Rows[e.RowIndex].Cells[0].Value);
                     if (appointmentId > 0)
                     {
-                        DataLayer.Patient patient = appointmentDetails.GetPatientInfoByAppointmentId(appointmentId);
+                        Patient patient = appointmentDetails.GetPatientInfoByAppointmentId(appointmentId);
                         lbl_patientName.Text = patient.PName;
                         lbl_patientLastName.Text = patient.PLastName;
                         lbl_patientPhone.Text = patient.PhoneNum;
                         lbl_patientEmail.Text = patient.Email;
                         lbl_patientDate.Text = patient.RecordDate.ToShortDateString();
-                        DataLayer.PatientRecord record = appointmentDetails.GetAppointmentNoteByAppointmentId(appointmentId);
+                        PatientRecord record = appointmentDetails.GetAppointmentNoteByAppointmentId(appointmentId);
                         txt_patientNote.Text = record.Note;
                     }
                 }

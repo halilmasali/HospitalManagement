@@ -11,7 +11,7 @@ namespace HospitalManagement.BusinnesLayer
 {
     class AppointmentDetailsController
     {
-        public DataTable GetAppointmentDetailsList() //Randevu Detay tablosunu geriye döndürür
+        public DataTable GetAppointmentListbyDoctor(int doctorId) //Randevu Detay tablosunu geriye döndürür
         {
             try
             {
@@ -21,7 +21,9 @@ namespace HospitalManagement.BusinnesLayer
                     "Patient.PName & ' ' & Patient.PLastName AS [Hasta Adı]," +
                     "Appointment.DateTime AS[Randevu Zamanı] " +
                     "FROM(Appointment " +
-                    "INNER JOIN Patient ON Appointment.PatientId = Patient.PatientId)");
+                    "INNER JOIN Patient ON Appointment.PatientId = Patient.PatientId)" +
+                    "WHERE Appointment.DoctorId = @DoctorId");
+                sqlCommand.Parameters.AddWithValue("@DoctorId", doctorId);
                 DataTable table = new DataTable();
                 table.Load(sqlCommand.ExecuteReader());
                 return table;
@@ -90,13 +92,22 @@ namespace HospitalManagement.BusinnesLayer
                     "WHERE AppointmentId = @AppointmentId");
                 sqlCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
                 OleDbDataReader dataReader = sqlCommand.ExecuteReader();
-                dataReader.Read();
-                PatientRecord patient = new PatientRecord(
-                    Convert.ToInt32(dataReader[0]),
-                    Convert.ToInt32(dataReader[1]),
-                    dataReader[2].ToString());
-                dataReader.Close();
-                return patient;
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    PatientRecord patient = new PatientRecord(
+                        Convert.ToInt32(dataReader[0]),
+                        Convert.ToInt32(dataReader[1]),
+                        dataReader[2].ToString());
+                    dataReader.Close();
+                    return patient;
+                }
+                else
+                {
+                    PatientRecord nullpatient = new PatientRecord(0,0,"");
+                    return nullpatient;
+                }
+                
             }
             catch (OleDbException exception)
             {

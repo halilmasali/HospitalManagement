@@ -11,6 +11,7 @@ namespace HospitalManagement.BusinnesLayer
 {
     class DoctorControl
     {
+        private static int AuthCredential = 0;
         public static List<Doctor> getDoctors() //Doktor listesini geriye döndürür.
         {
             OleDbCommand sqlCommand = Database.SqlCommand("select * from Doctor");
@@ -162,12 +163,13 @@ namespace HospitalManagement.BusinnesLayer
         {
             try
             {
-                OleDbCommand sqlCommand = Database.SqlCommand("SELECT PhoneNumber,DPassword FROM Doctor");
+                OleDbCommand sqlCommand = Database.SqlCommand("SELECT PhoneNumber,DPassword,DoctorId FROM Doctor");
                 OleDbDataReader dataReader = sqlCommand.ExecuteReader();
                 while (dataReader.Read())
                 {
                     if (dataReader[0].ToString() == phone && dataReader[1].ToString() == password)
                     {
+                        AuthCredential = Convert.ToInt32(dataReader[2]);
                         return true;
                     }
                 }
@@ -177,6 +179,34 @@ namespace HospitalManagement.BusinnesLayer
             {
                 System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
                 return false;
+            }
+        }
+
+        //Açılan doktor oturumunun bilgisini geriye göndürür.
+        public Doctor GetDoctorSession()
+        {
+            try
+            {
+                OleDbCommand sqlCommand = Database.SqlCommand(
+                    "SELECT * FROM Doctor " +
+                    "WHERE DoctorId = @DoctorId");
+                sqlCommand.Parameters.AddWithValue("@DoctorId", AuthCredential);
+                OleDbDataReader dataReader = sqlCommand.ExecuteReader();
+                dataReader.Read();
+                Doctor doctor = new Doctor(
+                    Convert.ToInt32(dataReader[0]),
+                    dataReader[1].ToString(),
+                    dataReader[2].ToString(),
+                    Convert.ToInt32(dataReader[3]),
+                    dataReader[4].ToString(),
+                    dataReader[5].ToString());
+                dataReader.Close();
+                return doctor;
+            }
+            catch (OleDbException exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Hata :" + exception.Message);
+                return null;
             }
         }
     }

@@ -15,6 +15,7 @@ namespace HospitalManagement
         PatientController patient; //patient parametresi oluşturuldu.
         AppointmentController appointment; //appointment parametresi oluşturuldu.
         DoctorControl doctor;//doctor paramatresi oluşturuldu
+        Secretary secretarySession;//Oturum açan sekter parametresi oluşturuldu.
         int secretaryId = 0, patientId = 0, appointmentId = 0, doctorId = 0;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -24,7 +25,11 @@ namespace HospitalManagement
             appointment = new AppointmentController(); //Randevu için controller oluşturuluyor.
             doctor = new DoctorControl(); //Doktor için controller oluşturuluyor.
             tabControl1.SelectedTab = tabPage_Appointment; //Seçili Tab, Randevu olarak ayarlanıyor.
-            dt_date.MinDate = DateTime.Today; //DateTime öğesi için seçilebilecek ilk tarih bugünden itibaren olacak şekilde ayarlanıyor.
+            dt_date.MinDate = DateTime.Today; //DateTime öğesi için seçilebilecek ilk tarih
+                                              //bugünden itibaren olacak şekilde ayarlanıyor.
+            secretarySession = secretary.GetSecretarySession();//oturum açan sekreter bilgisi alındı.
+            this.Text += " - " + secretarySession.Name + " " + 
+                secretarySession.LastName;//sekreter ismi form başlığına yazıldı.
         }
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
@@ -81,7 +86,7 @@ namespace HospitalManagement
                 int doctorId = ((Doctor)cmb_doctor.SelectedItem).DoctorId;
                 int patientId = ((Patient)cmb_patient.SelectedItem).PatientId;
                 DateTime dateTime = dt_date.Value.Date + TimeSpan.Parse(cmb_clock.SelectedItem.ToString());
-                appointment.CreateAppointment(branchId, doctorId, patientId, 1, dateTime);
+                appointment.CreateAppointment(branchId, doctorId, patientId, secretarySession.SecretaryId, dateTime);
                 MessageBox.Show("Randevu oluşturuldu.", "Bilgi",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 AppointmentFormClear();
