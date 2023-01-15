@@ -169,7 +169,7 @@ namespace HospitalManagement.BusinnesLayer
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
-                "SELECT Doctor.DName, COUNT(*) as Count " +
+                "SELECT Doctor.DName, COUNT(*) as [Count] " +
                 "FROM( Appointment " +
                 "INNER JOIN Doctor ON Doctor.DoctorId = Appointment.DoctorId) " +
                 "GROUP BY Doctor.DName");

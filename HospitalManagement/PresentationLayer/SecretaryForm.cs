@@ -51,12 +51,9 @@ namespace HospitalManagement
             {
                 dtGViewSecreter.DataSource = secretary.GetSecretarysList();
             }
-            else if (tabControl1.SelectedTab == tabPage1)
+            else if (tabControl1.SelectedTab == tabPage_statistic)
             {
-                chart1.DataSource = secretary.GetNumberofPatientsbyBranch();
-                chart1.Series[0].XValueMember = "Branch";
-                chart1.Series[0].YValueMembers = "Count";
-                //chart1.Series[0].ChartType = SeriesChartType.Line;
+                GetStatistic();
             }
         }
 
@@ -430,6 +427,19 @@ namespace HospitalManagement
             dtGViewSecreter.DataSource = secretary.GetSecretarysList();
         }
         #endregion
+
+        private void GetStatistic()
+        {
+            chart_branch.DataSource = secretary.GetNumberofPatientsbyBranch();
+            chart_branch.Series[0].XValueMember = "Branch";
+            chart_branch.Series[0].YValueMembers = "Count";
+            chart_branch.Invalidate();
+
+            chart_doctor.DataSource = secretary.GetNumberofPatientsbyDoctor();
+            chart_doctor.Series[0].XValueMember = "DName";
+            chart_doctor.Series[0].YValueMembers = "Count";
+            chart_doctor.Invalidate();
+        }
 
     }
 }

@@ -29,9 +29,12 @@ namespace HospitalManagement
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecretaryForm));
             this.tabPage_Secreter = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
@@ -101,8 +104,9 @@ namespace HospitalManagement
             this.cmb_clock = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tabPage_statistic = new System.Windows.Forms.TabPage();
+            this.chart_branch = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart_doctor = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage_Secreter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGViewSecreter)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -116,8 +120,9 @@ namespace HospitalManagement
             ((System.ComponentModel.ISupportInitialize)(this.dtGViewAppointment)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.tabPage_statistic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_branch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_doctor)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage_Secreter
@@ -823,7 +828,7 @@ namespace HospitalManagement
             this.tabControl1.Controls.Add(this.tabPage_Appointment);
             this.tabControl1.Controls.Add(this.tabPage_Doctor);
             this.tabControl1.Controls.Add(this.tabPage_Secreter);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage_statistic);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -832,31 +837,50 @@ namespace HospitalManagement
             this.tabControl1.TabIndex = 0;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
-            // tabPage1
+            // tabPage_statistic
             // 
-            this.tabPage1.Controls.Add(this.chart1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1176, 535);
-            this.tabPage1.TabIndex = 4;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage_statistic.Controls.Add(this.chart_doctor);
+            this.tabPage_statistic.Controls.Add(this.chart_branch);
+            this.tabPage_statistic.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_statistic.Name = "tabPage_statistic";
+            this.tabPage_statistic.Size = new System.Drawing.Size(1176, 535);
+            this.tabPage_statistic.TabIndex = 4;
+            this.tabPage_statistic.Text = "İstatistikler";
+            this.tabPage_statistic.UseVisualStyleBackColor = true;
             // 
-            // chart1
+            // chart_branch
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart_branch.ChartAreas.Add(chartArea2);
+            this.chart_branch.Location = new System.Drawing.Point(8, 13);
+            this.chart_branch.Name = "chart_branch";
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Bölüm";
+            this.chart_branch.Series.Add(series2);
+            this.chart_branch.Size = new System.Drawing.Size(560, 510);
+            this.chart_branch.TabIndex = 0;
+            this.chart_branch.Text = "chart1";
+            title2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            title2.Name = "Title1";
+            title2.Text = "Bölüme Göre Hasta Sayısı";
+            this.chart_branch.Titles.Add(title2);
+            // 
+            // chart_doctor
             // 
             chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(84, 49);
-            this.chart1.Name = "chart1";
+            this.chart_doctor.ChartAreas.Add(chartArea1);
+            this.chart_doctor.Location = new System.Drawing.Point(608, 13);
+            this.chart_doctor.Name = "chart_doctor";
             series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(929, 440);
-            this.chart1.TabIndex = 0;
-            this.chart1.Text = "chart1";
+            series1.Name = "Bölüm";
+            this.chart_doctor.Series.Add(series1);
+            this.chart_doctor.Size = new System.Drawing.Size(560, 510);
+            this.chart_doctor.TabIndex = 1;
+            this.chart_doctor.Text = "chart1";
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            title1.Name = "Title1";
+            title1.Text = "Doktora Göre Hasta Sayısı";
+            this.chart_doctor.Titles.Add(title1);
             // 
             // SecretaryForm
             // 
@@ -889,8 +913,9 @@ namespace HospitalManagement
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.tabPage_statistic.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart_branch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart_doctor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -965,8 +990,9 @@ namespace HospitalManagement
         private System.Windows.Forms.TextBox txt_secreter_password;
         private System.Windows.Forms.TextBox txt_doctor_password;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.TabPage tabPage_statistic;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart_branch;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart_doctor;
     }
 }
 
