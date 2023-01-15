@@ -51,6 +51,13 @@ namespace HospitalManagement
             {
                 dtGViewSecreter.DataSource = secretary.GetSecretarysList();
             }
+            else if (tabControl1.SelectedTab == tabPage1)
+            {
+                chart1.DataSource = secretary.GetNumberofPatientsbyBranch();
+                chart1.Series[0].XValueMember = "Branch";
+                chart1.Series[0].YValueMembers = "Count";
+                //chart1.Series[0].ChartType = SeriesChartType.Line;
+            }
         }
 
         #region Appointment Tab View Code

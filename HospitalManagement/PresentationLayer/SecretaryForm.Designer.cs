@@ -29,12 +29,17 @@ namespace HospitalManagement
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecretaryForm));
             this.tabPage_Secreter = new System.Windows.Forms.TabPage();
             this.label17 = new System.Windows.Forms.Label();
             this.txt_secreter_search = new System.Windows.Forms.TextBox();
             this.dtGViewSecreter = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txt_secreter_password = new System.Windows.Forms.TextBox();
             this.btn_secreter_delete = new System.Windows.Forms.Button();
             this.btn_secreter_update = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
@@ -49,6 +54,8 @@ namespace HospitalManagement
             this.txt_doctor_search = new System.Windows.Forms.TextBox();
             this.dtGViewDoctor = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txt_doctor_password = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.cmb_doctor_branch = new System.Windows.Forms.ComboBox();
             this.btn_doctor_delete = new System.Windows.Forms.Button();
             this.btn_doctor_update = new System.Windows.Forms.Button();
@@ -94,10 +101,8 @@ namespace HospitalManagement
             this.cmb_clock = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label20 = new System.Windows.Forms.Label();
-            this.txt_doctor_password = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.txt_secreter_password = new System.Windows.Forms.TextBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage_Secreter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtGViewSecreter)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -111,6 +116,8 @@ namespace HospitalManagement
             ((System.ComponentModel.ISupportInitialize)(this.dtGViewAppointment)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage_Secreter
@@ -177,6 +184,22 @@ namespace HospitalManagement
             this.groupBox4.TabIndex = 22;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Sekreter Kayıt Yönetim";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(26, 216);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(28, 13);
+            this.label22.TabIndex = 25;
+            this.label22.Text = "Şifre";
+            // 
+            // txt_secreter_password
+            // 
+            this.txt_secreter_password.Location = new System.Drawing.Point(122, 213);
+            this.txt_secreter_password.Name = "txt_secreter_password";
+            this.txt_secreter_password.Size = new System.Drawing.Size(187, 20);
+            this.txt_secreter_password.TabIndex = 26;
             // 
             // btn_secreter_delete
             // 
@@ -323,6 +346,22 @@ namespace HospitalManagement
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Doktor Kayıt Yönetim";
+            // 
+            // txt_doctor_password
+            // 
+            this.txt_doctor_password.Location = new System.Drawing.Point(122, 250);
+            this.txt_doctor_password.Name = "txt_doctor_password";
+            this.txt_doctor_password.Size = new System.Drawing.Size(187, 20);
+            this.txt_doctor_password.TabIndex = 9;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(26, 253);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(28, 13);
+            this.label20.TabIndex = 8;
+            this.label20.Text = "Şifre";
             // 
             // cmb_doctor_branch
             // 
@@ -784,6 +823,7 @@ namespace HospitalManagement
             this.tabControl1.Controls.Add(this.tabPage_Appointment);
             this.tabControl1.Controls.Add(this.tabPage_Doctor);
             this.tabControl1.Controls.Add(this.tabPage_Secreter);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -792,37 +832,31 @@ namespace HospitalManagement
             this.tabControl1.TabIndex = 0;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
-            // label20
+            // tabPage1
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(26, 253);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(28, 13);
-            this.label20.TabIndex = 8;
-            this.label20.Text = "Şifre";
+            this.tabPage1.Controls.Add(this.chart1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(1176, 535);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // txt_doctor_password
+            // chart1
             // 
-            this.txt_doctor_password.Location = new System.Drawing.Point(122, 250);
-            this.txt_doctor_password.Name = "txt_doctor_password";
-            this.txt_doctor_password.Size = new System.Drawing.Size(187, 20);
-            this.txt_doctor_password.TabIndex = 9;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(26, 216);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(28, 13);
-            this.label22.TabIndex = 25;
-            this.label22.Text = "Şifre";
-            // 
-            // txt_secreter_password
-            // 
-            this.txt_secreter_password.Location = new System.Drawing.Point(122, 213);
-            this.txt_secreter_password.Name = "txt_secreter_password";
-            this.txt_secreter_password.Size = new System.Drawing.Size(187, 20);
-            this.txt_secreter_password.TabIndex = 26;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(84, 49);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(929, 440);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
             // 
             // SecretaryForm
             // 
@@ -855,6 +889,8 @@ namespace HospitalManagement
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -929,6 +965,8 @@ namespace HospitalManagement
         private System.Windows.Forms.TextBox txt_secreter_password;
         private System.Windows.Forms.TextBox txt_doctor_password;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 
