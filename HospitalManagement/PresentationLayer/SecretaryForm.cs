@@ -1,5 +1,5 @@
-﻿using HospitalManagement.BusinnesLayer;
-using HospitalManagement.DataLayer;
+﻿using HospitalManagement.BusinnesLayer; //BusinessLayer'a ulaşmak için gerekli. 
+using HospitalManagement.DataLayer; //DataLayer'a' ulaşmak için gerekli. 
 using System;
 using System.Windows.Forms;
 
@@ -19,37 +19,37 @@ namespace HospitalManagement
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            secretary = new SecretaryControl();
-            patient = new PatientController();
-            appointment = new AppointmentController();
-            doctor = new DoctorControl();
-            tabControl1.SelectedTab = tabPage_Appointment;
-            dt_date.MinDate = DateTime.Today;
+            secretary = new SecretaryControl(); //Sekreter için controller oluşturuluyor.
+            patient = new PatientController(); //Hasta için controller oluşturuluyor.
+            appointment = new AppointmentController(); //Randevu için controller oluşturuluyor.
+            doctor = new DoctorControl(); //Doktor için controller oluşturuluyor.
+            tabControl1.SelectedTab = tabPage_Appointment; //Seçili Tab, Randevu olarak ayarlanıyor.
+            dt_date.MinDate = DateTime.Today; //DateTime öğesi için seçilebilecek ilk tarih bugünden itibaren olacak şekilde ayarlanıyor.
         }
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            if (tabControl1.SelectedTab == tabPage_Appointment)
+            if (tabControl1.SelectedTab == tabPage_Appointment) //Seçilen tab, randevu ise;
             {
-                dtGViewAppointment.DataSource = appointment.GetAppointmentList();
+                dtGViewAppointment.DataSource = appointment.GetAppointmentList(); //Controller aracılığıyla Randevu tablsou DGW'a yazdırılıyor.
                 cmb_branch.Items.Clear();
                 cmb_patient.Items.Clear();
                 cmb_branch.Items.AddRange(BranchControl.getBranchs().ToArray());
                 cmb_patient.Items.AddRange(PatientController.getPatients().ToArray());
             }
-            else if (tabControl1.SelectedTab == tabPage_Patient)
+            else if (tabControl1.SelectedTab == tabPage_Patient) //Seçilen tab, hasta ise;
             {
-                dtGViewPatient.DataSource = patient.GetPatientsList();
+                dtGViewPatient.DataSource = patient.GetPatientsList(); //Controller aracılığıyla Hasta tablsou DGW'a yazdırılıyor.
             }
-            else if (tabControl1.SelectedTab == tabPage_Doctor)
+            else if (tabControl1.SelectedTab == tabPage_Doctor) //Seçilen tab, doktor ise;
             {
-                dtGViewDoctor.DataSource = doctor.GetDoktorsList();
+                dtGViewDoctor.DataSource = doctor.GetDoktorsList(); //Controller aracılığıyla Doktor tablsou DGW'a yazdırılıyor.
                 cmb_doctor_branch.Items.Clear();
                 cmb_doctor_branch.Items.AddRange(BranchControl.getBranchs().ToArray());
             }
-            else if (tabControl1.SelectedTab == tabPage_Secreter)
+            else if (tabControl1.SelectedTab == tabPage_Secreter) //Seçilen tab, sekreter ise;
             {
-                dtGViewSecreter.DataSource = secretary.GetSecretarysList();
+                dtGViewSecreter.DataSource = secretary.GetSecretarysList(); //Controller aracılığıyla Sekreter tablsou DGW'a yazdırılıyor.
             }
             else if (tabControl1.SelectedTab == tabPage_statistic)
             {
@@ -58,7 +58,7 @@ namespace HospitalManagement
         }
 
         #region Appointment Tab View Code
-        private void cmb_branch_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmb_branch_SelectedIndexChanged(object sender, EventArgs e) //Branş seçimine göre doktor combobox'ına ilgili doktorları yazar.
         {
             cmb_doctor.Text = "";
             cmb_doctor.Items.Clear();
@@ -71,7 +71,7 @@ namespace HospitalManagement
             }
         }
 
-        private void btn_appointment_create_Click(object sender, EventArgs e)
+        private void btn_appointment_create_Click(object sender, EventArgs e) //Yeni randevu oluşturma event'i
         {
             if (cmb_branch.SelectedItem != null && cmb_doctor.SelectedItem != null &&
                 cmb_patient.SelectedItem != null && cmb_clock.SelectedItem != null &&
@@ -88,7 +88,7 @@ namespace HospitalManagement
             }
         }
 
-        private void txt_appointment_search_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_appointment_search_KeyPress(object sender, KeyPressEventArgs e) //Arama event'i
         {
             if (e.KeyChar == (Char)Keys.Enter)
             {
@@ -98,7 +98,7 @@ namespace HospitalManagement
                 }
             }
         }
-        private void dtGViewAppointment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dtGViewAppointment_CellDoubleClick(object sender, DataGridViewCellEventArgs e) //DGW'da çift tıklanan verinin ID'si alınıyor.
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -109,7 +109,7 @@ namespace HospitalManagement
             }
         }
 
-        private void btn_appointment_delete_Click(object sender, EventArgs e)
+        private void btn_appointment_delete_Click(object sender, EventArgs e) //Randevu silme event'i
         {
             if (appointmentId > 0)
             {
@@ -134,7 +134,7 @@ namespace HospitalManagement
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void AppointmentFormClear()
+        private void AppointmentFormClear() //Formu temizler.
         {
             cmb_branch.Text = "";
             cmb_doctor.Text = "";
@@ -147,7 +147,7 @@ namespace HospitalManagement
         #endregion
 
         #region Patient Tab View Code 
-        private void btn_patient_save_Click(object sender, EventArgs e)
+        private void btn_patient_save_Click(object sender, EventArgs e) //Hasta kaydetme event'i
         {
             if (txt_patient_name.Text != "" && txt_patient_lastname.Text != "" &&
                 txt_patient_email.Text != "" && txt_patient_phone.Text != "")
@@ -162,7 +162,7 @@ namespace HospitalManagement
             }
         }
 
-        private void btn_patient_update_Click(object sender, EventArgs e)
+        private void btn_patient_update_Click(object sender, EventArgs e) //Hasta güncelleme event'i
         {
             if (txt_patient_name.Text != "" && txt_patient_lastname.Text != "" &&
                 txt_patient_email.Text != "" && txt_patient_phone.Text != "" && patientId > 0)
@@ -177,7 +177,7 @@ namespace HospitalManagement
             }
         }
 
-        private void btn_patient_delete_Click(object sender, EventArgs e)
+        private void btn_patient_delete_Click(object sender, EventArgs e) //Hasta silme event'i
         {
             if (patientId > 0)
             {
@@ -202,7 +202,7 @@ namespace HospitalManagement
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void dtGViewPatient_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dtGViewPatient_CellDoubleClick(object sender, DataGridViewCellEventArgs e) //DGW'da veriye çift tıklayınca txtbox'lara bilgiler yazılıyor.
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -216,7 +216,7 @@ namespace HospitalManagement
                 }
             }
         }
-        private void txt_patient_search_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_patient_search_KeyPress(object sender, KeyPressEventArgs e) //Arama event'i
         {
             if (e.KeyChar == (Char)Keys.Enter)
             {
@@ -227,7 +227,7 @@ namespace HospitalManagement
             }
         }
 
-        private void PatientFormClear()
+        private void PatientFormClear() //Formu temizler
         {
             patientId = 0;
             txt_patient_name.Text = "";
@@ -239,7 +239,7 @@ namespace HospitalManagement
         #endregion
 
         #region Doctor Tab View Code
-        private void btn_doctor_save_Click(object sender, EventArgs e)
+        private void btn_doctor_save_Click(object sender, EventArgs e) //Doktor kaydetme event'i
         {
             if (txt_doctor_name.Text != "" && txt_doctor_lastname.Text != "" &&
                 txt_doctor_phone.Text != "" && txt_doctor_password.Text != "" && cmb_doctor_branch.SelectedItem != null)
@@ -255,7 +255,7 @@ namespace HospitalManagement
             }
         }
 
-        private void dtGViewDoctor_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dtGViewDoctor_CellDoubleClick(object sender, DataGridViewCellEventArgs e) //DGW'da veriye çift tıklayınca txtbox ve cmbox'lara bilgiler yazılıyor.
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -272,7 +272,7 @@ namespace HospitalManagement
             }
         }
 
-        private void txt_doctor_search_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_doctor_search_KeyPress(object sender, KeyPressEventArgs e) //Arama event'i
         {
             if (e.KeyChar == (Char)Keys.Enter)
             {
@@ -282,7 +282,7 @@ namespace HospitalManagement
                 }
             }
         }
-        private void btn_doctor_update_Click(object sender, EventArgs e)
+        private void btn_doctor_update_Click(object sender, EventArgs e) //Doktor güncelleme event'i
         {
             if (txt_doctor_name.Text != "" && txt_doctor_lastname.Text != "" &&
                txt_doctor_phone.Text != "" && txt_doctor_password.Text != "" && cmb_doctor_branch.SelectedItem != null && doctorId > 0)
@@ -298,7 +298,7 @@ namespace HospitalManagement
             }
         }
 
-        private void btn_doctor_delete_Click(object sender, EventArgs e)
+        private void btn_doctor_delete_Click(object sender, EventArgs e) //Doktor silme event'i
         {
             if (doctorId > 0)
             {
@@ -323,7 +323,7 @@ namespace HospitalManagement
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void DoctorFormClear()
+        private void DoctorFormClear() //Formu temizler
         {
             doctorId = 0;
             txt_doctor_name.Text = "";
@@ -336,7 +336,7 @@ namespace HospitalManagement
         #endregion
 
         #region Secretary Tab View Code
-        private void btn_secreter_save_Click(object sender, EventArgs e)
+        private void btn_secreter_save_Click(object sender, EventArgs e) //Sekreter kaydetme event'i
         {
             if (txt_secreter_name.Text != "" && txt_secreter_lastname.Text != "" &&
                  txt_secreter_phone.Text != "")
@@ -351,7 +351,7 @@ namespace HospitalManagement
             }
         }
 
-        private void txt_secreter_search_KeyPress(object sender, KeyPressEventArgs e)
+        private void txt_secreter_search_KeyPress(object sender, KeyPressEventArgs e) //Arama event'i
         {
             if (e.KeyChar == (Char)Keys.Enter)
             {
@@ -362,7 +362,7 @@ namespace HospitalManagement
             }
         }
 
-        private void dtGViewSecreter_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dtGViewSecreter_CellDoubleClick(object sender, DataGridViewCellEventArgs e) //DGW'da veriye çift tıklayınca txtbox'lara bilgiler yazılıyor.
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -377,7 +377,7 @@ namespace HospitalManagement
             }
         }
 
-        private void btn_secreter_update_Click(object sender, EventArgs e)
+        private void btn_secreter_update_Click(object sender, EventArgs e) //Sekreter güncelleme event'i
         {
             if (txt_secreter_name.Text != "" && txt_secreter_lastname.Text != "" &&
                  txt_secreter_phone.Text != "" && txt_secreter_password.Text != "" &&secretaryId > 0)
@@ -392,7 +392,7 @@ namespace HospitalManagement
             }
         }
 
-        private void btn_secreter_delete_Click(object sender, EventArgs e)
+        private void btn_secreter_delete_Click(object sender, EventArgs e) //Sekreter silme event'i
         {
             if (secretaryId > 0)
             {
@@ -417,7 +417,7 @@ namespace HospitalManagement
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void SecretaryFormClear()
+        private void SecretaryFormClear() //Formu temizler
         {
             secretaryId = 0;
             txt_secreter_name.Text = "";

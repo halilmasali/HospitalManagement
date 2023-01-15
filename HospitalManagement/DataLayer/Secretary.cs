@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.DataLayer
 {
-    class Secretary
+    class Secretary //Sekreter tablosu prop'ları.
     {
         public int SecretaryId { get; set; }
         public string Name { get; set; }
@@ -14,7 +14,7 @@ namespace HospitalManagement.DataLayer
         public string PhoneNum { get; set; }
         public string Password { get; set; }
 
-        public Secretary(int SecretaryId, string Name, string LastName, string PhoneNum, string Password)
+        public Secretary(int SecretaryId, string Name, string LastName, string PhoneNum, string Password) //Sekreter classı constructor'ı.
         {
             this.SecretaryId = SecretaryId;
             this.Name = Name;

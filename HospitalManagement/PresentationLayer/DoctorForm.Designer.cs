@@ -293,6 +293,7 @@ namespace HospitalManagement.PresentationLayer
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DoctorForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Doktor Ekranı";
             this.Load += new System.EventHandler(this.DoctorForm_Load);
             this.tabControl1.ResumeLayout(false);

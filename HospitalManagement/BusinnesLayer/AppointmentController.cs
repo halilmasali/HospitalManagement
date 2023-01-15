@@ -12,7 +12,7 @@ namespace HospitalManagement.BusinnesLayer
     class AppointmentController
     {
 
-        //Randevu listesini geriye döndürür
+        //Randevu tablosunu geriye döndürür
         public DataTable GetAppointmentList()
         {
             try
@@ -41,7 +41,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-
+        // Arama sorgusu sonucu oluşan değerleri datatable olarak return eder.
         public DataTable SearchAppointmentRecord(string searchValue)
         {
             try
@@ -72,6 +72,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
+        //duyuru silme
         public bool DeleteAppointmentRecord(int id)
         {
             try
@@ -89,6 +90,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
+        //yeni duyuru ekleme
         public void CreateAppointment(int branchId, int doctorId, int patientId, int secreteryId, DateTime dateTime)
         {
             OleDbCommand sqlCommand = Database.SqlCommand(

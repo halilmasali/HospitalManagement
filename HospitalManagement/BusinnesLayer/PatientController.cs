@@ -11,7 +11,7 @@ namespace HospitalManagement.BusinnesLayer
 {
     class PatientController
     {
-        public static List<Patient> getPatients()
+        public static List<Patient> getPatients() //Hasta listesini geriye döndürür.
         {
             OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM Patient");
             OleDbDataReader dataReader = sqlCommand.ExecuteReader();
@@ -32,7 +32,7 @@ namespace HospitalManagement.BusinnesLayer
             return patients;
         }
 
-        public bool AddPatientRecord(string name, string lastname, string phoneNum, string email)
+        public bool AddPatientRecord(string name, string lastname, string phoneNum, string email) //Yeni hasta kaydı ekler.
         {
             try
             {
@@ -55,7 +55,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public bool UpdatePatientRecord(int id, string name, string lastname, string phoneNum, string email)
+        public bool UpdatePatientRecord(int id, string name, string lastname, string phoneNum, string email) //Hasta kaydını günceller.
         {
             try
             {
@@ -78,7 +78,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public bool DeletePatientRecord(int id)
+        public bool DeletePatientRecord(int id) //Hasta kaydını siler.
         {
             try
             {
@@ -95,7 +95,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public DataTable SearchPatientRecord(string searchValue)
+        public DataTable SearchPatientRecord(string searchValue) //Arama sorgusu sonucu oluşan değerleri datatable olarak return eder.
         {
             try
             {
@@ -119,7 +119,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-        public DataTable GetPatientsList()
+        public DataTable GetPatientsList() //Hasta verisini datatable olarak geriye döndürür.
         {
             try
             {

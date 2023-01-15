@@ -12,7 +12,7 @@ namespace HospitalManagement.BusinnesLayer
 {
     class SecretaryControl
     {
-        public bool AddSecretaryRecord(string name, string lastname, string phoneNum, string password)
+        public bool AddSecretaryRecord(string name, string lastname, string phoneNum, string password) //Yeni sekreter kaydı ekler.
         {
             try
             {
@@ -35,7 +35,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public bool UpdateSecretaryRecord(int id, string name, string lastname, string phoneNum, string password)
+        public bool UpdateSecretaryRecord(int id, string name, string lastname, string phoneNum, string password) //Sekreter kaydını günceller.
         {
             try
             {
@@ -60,7 +60,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public bool DeleteSecretaryRecord(int id)
+        public bool DeleteSecretaryRecord(int id) //Sekreter kaydını siler.
         {
             try
             {
@@ -77,7 +77,7 @@ namespace HospitalManagement.BusinnesLayer
             return false;
         }
 
-        public DataTable SearchSecretaryRecord(string searchValue)
+        public DataTable SearchSecretaryRecord(string searchValue) //Arama sorgusu sonucu oluşan değerleri datatable olarak return eder.
         {
             try
             {
@@ -100,7 +100,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-        public DataTable GetSecretarysList()
+        public DataTable GetSecretarysList() //Sekreter verisini datatable olarak geriye döndürür.
         {
             try
             {
@@ -122,7 +122,7 @@ namespace HospitalManagement.BusinnesLayer
             }
         }
 
-        public bool SecretaryAuth(string phone, string password)
+        public bool SecretaryAuth(string phone, string password) //Sekreter girşi için authentication yapar.
         {
             try
             {

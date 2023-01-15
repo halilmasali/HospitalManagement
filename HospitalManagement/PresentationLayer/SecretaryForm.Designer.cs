@@ -890,6 +890,7 @@ namespace HospitalManagement
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SecretaryForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sekreter Ekranı";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabPage_Secreter.ResumeLayout(false);

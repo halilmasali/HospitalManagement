@@ -10,7 +10,7 @@ namespace HospitalManagement.BusinnesLayer
 {
     class BranchControl
     {
-        public static List<Branch> getBranchs()
+        public static List<Branch> getBranchs() //Branş listesini geriye döndürür.
         {
             OleDbCommand sqlCommand = Database.SqlCommand("select * from Branch");
             OleDbDataReader dataReader = sqlCommand.ExecuteReader();

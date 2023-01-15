@@ -142,6 +142,7 @@ namespace HospitalManagement.PresentationLayer
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(390, 370);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hastane Randevu Sistemi";
             this.grp_auth.ResumeLayout(false);
             this.grp_auth.PerformLayout();
