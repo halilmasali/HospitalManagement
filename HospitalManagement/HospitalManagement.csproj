@@ -63,6 +63,9 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>hospital.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="itextsharp">
       <HintPath>C:\Users\emiro\Downloads\itextsharp-5.0.5-dll\itextsharp.dll</HintPath>
@@ -168,6 +171,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="hospital.ico" />
     <Content Include="Hospital.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
