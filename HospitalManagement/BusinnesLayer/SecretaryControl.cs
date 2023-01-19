@@ -171,10 +171,10 @@ namespace HospitalManagement.BusinnesLayer
             try
             {
                 OleDbCommand sqlCommand = Database.SqlCommand(
-                "SELECT Doctor.DName, COUNT(*) as [Count] " +
+                "SELECT Doctor.DName & ' ' & Doctor.DLastName AS [Doktor Adı], COUNT(*) as [Count] " +
                 "FROM( Appointment " +
                 "INNER JOIN Doctor ON Doctor.DoctorId = Appointment.DoctorId) " +
-                "GROUP BY Doctor.DName");
+                "GROUP BY Doctor.DName & ' ' & Doctor.DLastName");
                 DataTable table = new DataTable();
                 table.Load(sqlCommand.ExecuteReader());
                 return table;

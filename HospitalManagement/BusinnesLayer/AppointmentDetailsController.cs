@@ -67,11 +67,6 @@ namespace HospitalManagement.BusinnesLayer
         {
             try
             {
-                //OleDbCommand sqlCommand = Database.SqlCommand(
-                //    "INSERT INTO PatientRecord (AppointmentId,[Note]) " +
-                //    "VALUES(@AppointmentId,@Note)");
-                //OleDbCommand sqlCommand = Database.SqlCommand(
-                //    "UPDATE PatientRecord SET [Note] = @Note WHERE AppointmentId = @AppointmentId");
                 OleDbCommand sqlCommand = Database.SqlCommand("SELECT * FROM PatientRecord WHERE AppointmentId = @AppointmentId");
                 sqlCommand.Parameters.AddWithValue("@AppointmentId", appointmentId);
                 OleDbDataReader dataReader = sqlCommand.ExecuteReader();
