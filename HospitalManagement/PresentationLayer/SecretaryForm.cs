@@ -441,7 +441,7 @@ namespace HospitalManagement
             chart_branch.Invalidate();
 
             chart_doctor.DataSource = secretary.GetNumberofPatientsbyDoctor();
-            chart_doctor.Series[0].XValueMember = "DName";
+            chart_doctor.Series[0].XValueMember = "Doktor Adı";
             chart_doctor.Series[0].YValueMembers = "Count";
             chart_doctor.Invalidate();
         }

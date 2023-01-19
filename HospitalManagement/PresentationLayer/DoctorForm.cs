@@ -23,7 +23,6 @@ namespace HospitalManagement.PresentationLayer
         AppointmentDetailsController appointmentDetails; //RandevuDetay için controller referansı oluşturuluyor.
         DoctorControl doctor;
         Doctor doctorSession;
-
         private void btn_save_Click(object sender, EventArgs e) //RandevuDetaylarını kaydeder.
         {
             if (txt_patientNote.Text != "")
@@ -155,7 +154,8 @@ namespace HospitalManagement.PresentationLayer
                 e.Graphics.DrawString(lbl_patientName.Text + " " + lbl_patientLastName.Text, font, firca, x, y);
                 e.Graphics.DrawString(lbl_patientEmail.Text, font, firca, x, y + 30);
                 e.Graphics.DrawString(lbl_patientPhone.Text, font, firca, x, y + 60);
-                e.Graphics.DrawString(dtGViewAppointmentDetails.Rows[0].Cells[2].Value.ToString(), font, firca, x, y + 90);
+                Patient patient = appointmentDetails.GetPatientInfoByAppointmentId(appointmentId);
+                e.Graphics.DrawString(dtGViewAppointmentDetails.SelectedRows[0].Cells[2].Value.ToString(), font, firca, x, y + 90);
 
                 e.Graphics.DrawLine(kalem, 50, 420, 780, 420);
                 e.Graphics.DrawLine(kalem, 50, 900, 780, 900);
