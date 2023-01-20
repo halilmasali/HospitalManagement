@@ -80,7 +80,7 @@ namespace HospitalManagement.PresentationLayer
             this.grp_auth.Location = new System.Drawing.Point(12, 13);
             this.grp_auth.Name = "grp_auth";
             this.grp_auth.Size = new System.Drawing.Size(347, 306);
-            this.grp_auth.TabIndex = 2;
+            this.grp_auth.TabIndex = 0;
             this.grp_auth.TabStop = false;
             this.grp_auth.Text = "Kullanıcı Girişi";
             this.grp_auth.Visible = false;
@@ -91,15 +91,14 @@ namespace HospitalManagement.PresentationLayer
             this.txt_phoneNum.Mask = "(999) 000-0000";
             this.txt_phoneNum.Name = "txt_phoneNum";
             this.txt_phoneNum.Size = new System.Drawing.Size(169, 20);
-            this.txt_phoneNum.TabIndex = 5;
-            this.txt_phoneNum.Text = "5380279357";
+            this.txt_phoneNum.TabIndex = 0;
             // 
             // btn_auth
             // 
             this.btn_auth.Location = new System.Drawing.Point(38, 209);
             this.btn_auth.Name = "btn_auth";
             this.btn_auth.Size = new System.Drawing.Size(277, 46);
-            this.btn_auth.TabIndex = 4;
+            this.btn_auth.TabIndex = 2;
             this.btn_auth.Text = "Oturum Aç";
             this.btn_auth.UseVisualStyleBackColor = true;
             this.btn_auth.Click += new System.EventHandler(this.btn_auth_Click);
@@ -108,9 +107,9 @@ namespace HospitalManagement.PresentationLayer
             // 
             this.txt_password.Location = new System.Drawing.Point(146, 130);
             this.txt_password.Name = "txt_password";
+            this.txt_password.PasswordChar = '*';
             this.txt_password.Size = new System.Drawing.Size(169, 20);
-            this.txt_password.TabIndex = 3;
-            this.txt_password.Text = "1234";
+            this.txt_password.TabIndex = 1;
             // 
             // label2
             // 

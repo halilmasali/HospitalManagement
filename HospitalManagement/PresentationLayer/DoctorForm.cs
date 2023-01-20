@@ -1,14 +1,8 @@
 ﻿using HospitalManagement.BusinnesLayer; //BusinessLayer'a ulaşmak için gerekli. 
 using HospitalManagement.DataLayer;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing; //Yazdırma işlemleri için gerekli.
-using System.Linq;
 using System.Text; //StringBuilder kullanımı için gerekli.
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HospitalManagement.PresentationLayer
@@ -65,7 +59,8 @@ namespace HospitalManagement.PresentationLayer
             dtGViewAppointmentDetails.DataSource = appointmentDetails.GetAppointmentListbyDoctor(doctorSession.DoctorId);
         }
 
-        private void dtGViewAppointmentDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e) //DGW'da veriye çift tıklayınca label'lara bilgiler yazılıyor.
+        //DGW'da veriye çift tıklayınca label'lara bilgiler yazılıyor.
+        private void dtGViewAppointmentDetails_CellDoubleClick(object sender, DataGridViewCellEventArgs e) 
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
@@ -102,7 +97,8 @@ namespace HospitalManagement.PresentationLayer
             }
         }
 
-        //doktor görüşlerinin yer aldığı textbox'ın içeriğini pdf'e dönüştürürken tek satır halinde değil de paragraf halinde yazmasını sağlamak amacıyla kullanılacak method
+        //doktor görüşlerinin yer aldığı textbox'ın içeriğini pdf'e dönüştürürken tek satır
+        //halinde değil de paragraf halinde yazmasını sağlamak amacıyla kullanılacak method
         public static string AddLineBreaks(string input, int maxLength)
         {
             StringBuilder sb = new StringBuilder();
@@ -121,15 +117,17 @@ namespace HospitalManagement.PresentationLayer
             return sb.ToString();
         }
 
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e) //Yazdırma işlemi için sayfa düzeni oluşturuluyor.
+        //Yazdırma işlemi için sayfa düzeni oluşturuluyor.
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e) 
         {
             try
             {
                 Font font = new Font("Arial", 10);  //font nesnesi oluşturuluyor.
                 SolidBrush firca = new SolidBrush(Color.Black); //yazıyı yazması için fırça nesnesi oluşturuluyor
                 Pen kalem = new Pen(Color.Black); //çizgi çizilmesi için kalem nesnesi oluşturuluyor.
-
-                e.Graphics.DrawString($"Rapor Tarihi: {DateTime.Now.ToString("dd.MM.yyyy")}", font, firca, 50, 25); //drawstring methoduyla istenilen yazı yazdırılıyor
+                
+                //drawstring methoduyla istenilen yazı yazdırılıyor
+                e.Graphics.DrawString($"Rapor Tarihi: {DateTime.Now.ToString("dd.MM.yyyy")}", font, firca, 50, 25); 
 
                 font = new Font("Arial", 18, FontStyle.Bold);
                 e.Graphics.DrawString("Hasta Randevu Detayları - Sonuçları", font, firca, 195, 100);
@@ -184,6 +182,7 @@ namespace HospitalManagement.PresentationLayer
             }
         }
 
+        //Mail gönderme işlemi
         private void btn_sendmail_Click(object sender, EventArgs e)
         {
             if (lbl_patientName.Text != "" && lbl_patientLastName.Text != "" && lbl_patientPhone.Text != "" &&
@@ -195,7 +194,7 @@ namespace HospitalManagement.PresentationLayer
                 {
                     MailSender.SendMail(
                         lbl_patientEmail.Text,
-                        lbl_patientName.Text + " " + lbl_patientLastName.Text + "Randevu Sonucu",
+                        lbl_patientName.Text + " " + lbl_patientLastName.Text + " Randevu Sonucu",
                         txt_patientNote.Text,
                         null);
                 }

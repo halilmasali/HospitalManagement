@@ -27,7 +27,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_80E32451205F45EFB9813788F0DC468E"
+        "MsmKey" = "8:_807BA9A367DE4B77BDE6D718EF449597"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -175,7 +175,7 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_80E32451205F45EFB9813788F0DC468E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_807BA9A367DE4B77BDE6D718EF449597"
             {
             "SourcePath" = "8:..\\HospitalManagement\\Hospital.mdb"
             "TargetName" = "8:Hospital.mdb"
@@ -272,7 +272,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Hastane Randevu Sistemi"
         "ProductCode" = "8:{43F86841-DA07-447F-9D91-AB0D4C49C843}"
-        "PackageCode" = "8:{2DAC48CB-14D8-48FF-93B1-FA99AD76BD46}"
+        "PackageCode" = "8:{96DADFD9-2D10-44CE-B70A-89789F69E7C0}"
         "UpgradeCode" = "8:{7C82C992-5264-4010-A8FC-DF0CC1DDC4BD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

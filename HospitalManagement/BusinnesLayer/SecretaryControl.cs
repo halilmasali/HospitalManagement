@@ -1,12 +1,7 @@
 ﻿using HospitalManagement.DataLayer;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 
 namespace HospitalManagement.BusinnesLayer
 {
@@ -145,8 +140,8 @@ namespace HospitalManagement.BusinnesLayer
                 return false;
             }
         }
-        //Branşa göre hasta sayısı
-        public DataTable GetNumberofPatientsbyBranch()
+        
+        public DataTable GetNumberofPatientsbyBranch() //Branşa göre hasta sayısı
         {
             try
             {
@@ -165,8 +160,8 @@ namespace HospitalManagement.BusinnesLayer
                 return null;
             }
         }
-        //Doktora göre hasta sayısı
-        public DataTable GetNumberofPatientsbyDoctor()
+        
+        public DataTable GetNumberofPatientsbyDoctor() //Doktora göre hasta sayısı
         {
             try
             {
@@ -185,8 +180,8 @@ namespace HospitalManagement.BusinnesLayer
                 return null;
             }
         }
-        //Açılan sekreter oturumunun bilgisini geriye göndürür.
-        public Secretary GetSecretarySession()
+        
+        public Secretary GetSecretarySession() //Açılan sekreter oturumunun bilgisini geriye göndürür.
         {
             try
             {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace HospitalManagement.DataLayer
 {
     class Secretary //Sekreter tablosu prop'ları.
@@ -14,7 +9,8 @@ namespace HospitalManagement.DataLayer
         public string PhoneNum { get; set; }
         public string Password { get; set; }
 
-        public Secretary(int SecretaryId, string Name, string LastName, string PhoneNum, string Password) //Sekreter classı constructor'ı.
+        public Secretary(int SecretaryId, string Name, string LastName,
+            string PhoneNum, string Password) //Sekreter classı constructor'ı.
         {
             this.SecretaryId = SecretaryId;
             this.Name = Name;
